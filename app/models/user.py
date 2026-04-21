@@ -1,13 +1,13 @@
 import mysql.connector
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
 
 #  Connect to DB
 def get_db_connection():
     return mysql.connector.connect(
         host="localhost",
         user="root",
-        password="1234",
-        database="project_management"
+        password="ritajones19@senoj21",
+        database="cs_learning_platform"
     )
 
 def create_user(username, email, password):
@@ -48,4 +48,27 @@ def create_user(username, email, password):
     cursor.close()
     conn.close()
 
-    return "created"
+    return user_id #fix/changed it so create_user return the actual user_id instead of the string "created"
+
+def get_user_by_email(email, password):
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    cursor.execute("""
+        SELECT u.user_id, u.username, u.email, u.password_hash, r.type AS role
+        FROM Users u
+        JOIN Role r ON u.role_id = r.role_id
+        WHERE u.email = %s
+    """, (email,))
+
+    user = cursor.fetchone()
+    cursor.close()
+    conn.close()
+
+    if not user:
+        return "not_found"
+
+    if not check_password_hash(user["password_hash"], password):
+        return "wrong_password"
+
+    return user
