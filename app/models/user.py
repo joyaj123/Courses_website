@@ -49,3 +49,21 @@ def create_user(username, email, password):
     conn.close()
 
     return "created"
+
+
+def get_user_by_id(user_id):
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    query = """
+        SELECT user_id, username, email, role, created_at, updated_at
+        FROM users
+        WHERE user_id = %s
+    """
+    cursor.execute(query, (user_id,))
+    user = cursor.fetchone()
+
+    cursor.close()
+    conn.close()
+
+    return user
