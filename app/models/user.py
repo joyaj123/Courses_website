@@ -1,13 +1,14 @@
 import mysql.connector
-from werkzeug.security import generate_password_hash
+from werkzeug.security import generate_password_hash, check_password_hash
+
 
 #  Connect to DB
 def get_db_connection():
     return mysql.connector.connect(
         host="localhost",
         user="root",
-        password="1234",
-        database="project_management"
+        password="Elinka81@",
+        database="cs_learning_platform"
     )
 
 def create_user(username, email, password):
@@ -15,14 +16,14 @@ def create_user(username, email, password):
     cursor = conn.cursor(dictionary=True)
 
     # Check if user exists
-    cursor.execute("SELECT * FROM users WHERE email = %s", (email,))
+    cursor.execute("SELECT * FROM Users WHERE email = %s", (email,))
     if cursor.fetchone():
         cursor.close()
         conn.close()
         return "exists"
 
     #  GET learner role_id
-    cursor.execute("SELECT role_id FROM role WHERE type = %s", ("learner",))
+    cursor.execute("SELECT role_id FROM Role WHERE type = %s", ("learner",))
     role = cursor.fetchone()
 
     if not role:
@@ -37,7 +38,7 @@ def create_user(username, email, password):
 
     # Insert user WITH role_id
     query = """
-    INSERT INTO users (username, email, password_hash, role_id)
+    INSERT INTO Users (username, email, password_hash, role_id)
     VALUES (%s, %s, %s, %s)
     """
     cursor.execute(query, (username, email, hashed_password, role_id))
@@ -47,5 +48,31 @@ def create_user(username, email, password):
 
     cursor.close()
     conn.close()
+    return user_id
 
-    return "created"
+#retrieves a user from the database using email
+def get_user_by_email(email):
+    conn=get_db_connection()
+    cursor=conn.cursor(dictionary=True)
+
+    query = "SELECT * FROM Users WHERE email = %s"
+    cursor.execute(query, (email,))
+    user = cursor.fetchone()
+
+    cursor.close()
+    conn.close()
+
+    return user
+    
+#verifies user login 
+def verify_user(email,password):
+    user=get_user_by_email(email)
+
+    if not user:
+        return None
+    if check_password_hash(user["password_hash"],password):
+        return user
+    return None
+
+    
+
