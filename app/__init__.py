@@ -2,6 +2,8 @@ from flask import Flask
 from app.routes.signup import signup
 from app.routes.login import login
 from app.models.user import get_db_connection
+from app.routes.user_routes import get_me 
+from app.routes.courses_routes import get_my_courses
 
 
 
@@ -26,6 +28,8 @@ def create_app():
 
     app.add_url_rule("/signup", view_func=signup, methods=["POST"])
     app.add_url_rule("/login", view_func=login, methods=["POST"])
+    app.add_url_rule("/me", view_func=get_me, methods=["GET"])
+    app.add_url_rule("/my-courses", view_func=get_my_courses, methods=["GET"])
 
 
     
