@@ -1,15 +1,8 @@
 import mysql.connector
 from werkzeug.security import generate_password_hash, check_password_hash
+from app.config.db import get_db_connection
 
 
-#  Connect to DB
-def get_db_connection():
-    return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="Elinka81@",
-        database="cs_learning_platform"
-    )
 
 def create_user(username, email, password):
     conn = get_db_connection()

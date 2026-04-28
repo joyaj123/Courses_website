@@ -1,17 +1,9 @@
-import mysql.connector
+from app.config.db import get_db_connection
 
-
-def get_connection():
-    return mysql.connector.connect(
-        host="localhost",
-        user="root",
-        password="Elinka81@", 
-        database="cs_learning_platform"
-    )
 
 
 def get_course_details_by_id(course_id):
-    connection = get_connection()
+    connection = get_db_connection()
     cursor = connection.cursor(dictionary=True)
 
     try:
@@ -156,3 +148,164 @@ def get_categories_with_course_count():
 
 
 
+def course_title_exists(title):
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    cursor.execute("""
+        SELECT course_id
+        FROM Courses
+        WHERE title = %s
+    """, (title,))
+
+    result = cursor.fetchone()
+
+    cursor.close()
+    conn.close()
+
+    return result
+
+
+def create_course_with_materials(title, description, cat_id, diff_id, created_by, materials):
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    try:
+        cursor.execute("""
+            INSERT INTO Courses (title, description, cat_id, diff_id, created_by)
+            VALUES (%s, %s, %s, %s, %s)
+        """, (title, description, cat_id, diff_id, created_by))
+
+        course_id = cursor.lastrowid
+
+        for material in materials:
+            cursor.execute("""
+                INSERT INTO Course_Materials
+                (course_id, title, m_id, content_url, content_text, order_index)
+                VALUES (%s, %s, %s, %s, %s, %s)
+            """, (
+                course_id,
+                material.get("title"),
+                material.get("m_id"),
+                material.get("content_url"),
+                material.get("content_text"),
+                material.get("order_index", 0)
+            ))
+
+        conn.commit()
+        return course_id
+
+    except Exception as e:
+        conn.rollback()
+        raise e
+
+    finally:
+        cursor.close()
+        conn.close()
+
+
+#get the course info anf course matirial 
+def get_course_for_edit(course_id):
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    try:
+        cursor.execute("""
+            SELECT 
+                course_id,
+                title,
+                description,
+                cat_id,
+                diff_id,
+                created_by
+            FROM Courses
+            WHERE course_id = %s
+        """, (course_id,))
+
+        course = cursor.fetchone()
+
+        if not course:
+            return None
+
+        cursor.execute("""
+            SELECT
+                material_id,
+                title,
+                m_id,
+                content_url,
+                content_text,
+                order_index
+            FROM Course_Materials
+            WHERE course_id = %s
+            ORDER BY order_index ASC
+        """, (course_id,))
+
+        course["materials"] = cursor.fetchall()
+
+        return course
+
+    finally:
+        cursor.close()
+        conn.close()
+
+
+
+def update_course_with_materials(course_id, title, description, cat_id, diff_id, materials):
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    try:
+        cursor.execute("""
+            UPDATE Courses
+            SET title = %s,
+                description = %s,
+                cat_id = %s,
+                diff_id = %s
+            WHERE course_id = %s
+        """, (title, description, cat_id, diff_id, course_id))
+
+        for material in materials:
+            material_id = material.get("material_id")
+
+            if material_id:
+                cursor.execute("""
+                    UPDATE Course_Materials
+                    SET title = %s,
+                        m_id = %s,
+                        content_url = %s,
+                        content_text = %s,
+                        order_index = %s
+                    WHERE material_id = %s AND course_id = %s
+                """, (
+                    material.get("title"),
+                    material.get("m_id"),
+                    material.get("content_url"),
+                    material.get("content_text"),
+                    material.get("order_index", 0),
+                    material_id,
+                    course_id
+                ))
+            else:
+                cursor.execute("""
+                    INSERT INTO Course_Materials
+                    (course_id, title, m_id, content_url, content_text, order_index)
+                    VALUES (%s, %s, %s, %s, %s, %s)
+                """, (
+                    course_id,
+                    material.get("title"),
+                    material.get("m_id"),
+                    material.get("content_url"),
+                    material.get("content_text"),
+                    material.get("order_index", 0)
+                ))
+
+        conn.commit()
+        return True
+
+    except Exception as e:
+        conn.rollback()
+        raise e
+
+    finally:
+        cursor.close()
+        conn.close()
