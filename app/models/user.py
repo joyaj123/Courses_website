@@ -77,6 +77,9 @@ def get_user_by_id(user_id):
     cursor = conn.cursor(dictionary=True)
 
     query = """
+        SELECT user_id, username, email, role_id, created_at, updated_at
+        FROM users
+        WHERE user_id = %s
         SELECT 
             u.user_id,
             u.username,
