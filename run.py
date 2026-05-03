@@ -8,6 +8,7 @@ from app.routes.courses_routes import get_my_courses, add_course
 from app.routes.course_details import course_details
 from app.routes.courses_routes import get_course_edit, edit_course
 from app.routes.profile_routes import get_profile, update_profile
+from app.routes.admin_routes import get_dashboard_stats
 
 app = create_app()
 
@@ -26,6 +27,7 @@ app.add_url_rule("/courses/<int:course_id>", view_func=course_details, methods=[
 app.add_url_rule("/admnin/add-courses", view_func=add_course, methods=["POST"]) ####t to check when doing front end 
 app.add_url_rule("/admin/courses/<int:course_id>", view_func=get_course_edit, methods=["GET"])
 app.add_url_rule("/admin/courses/<int:course_id>", view_func=edit_course, methods=["PUT"])
+app.add_url_rule("/admin/dashboard",view_func=get_dashboard_stats,methods=["GET"])
 
 # PROFILE                                   
 app.add_url_rule("/profile", view_func=get_profile, methods=["GET"])     
