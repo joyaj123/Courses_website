@@ -22,9 +22,23 @@ app.add_url_rule("/my-courses", view_func=get_my_courses, methods=["GET"])
 app.add_url_rule("/courses/<int:course_id>", view_func=course_details, methods=["GET"])
 
 #ADMIN ROUTES
-app.add_url_rule("/admnin/add-courses", view_func=add_course, methods=["POST"]) ####t to check when doing front end 
-app.add_url_rule("/admin/courses/<int:course_id>", view_func=get_course_edit, methods=["GET"])
-app.add_url_rule("/admin/courses/<int:course_id>", view_func=edit_course, methods=["PUT"])
+from app.routes.admin_course_routes import (
+    add_course,
+    edit_course,
+    remove_course,
+    get_course,
+    get_course_edit
+)
+
+app.add_url_rule('/admin/course', view_func=add_course, methods=['POST'])
+
+app.add_url_rule('/admin/course/<int:course_id>', view_func=edit_course, methods=['PUT'])
+
+app.add_url_rule('/admin/course/<int:course_id>', view_func=remove_course, methods=['DELETE'])
+
+app.add_url_rule('/admin/course/<int:course_id>', view_func=get_course, methods=['GET'])
+
+app.add_url_rule('/admin/course/edit/<int:course_id>', view_func=get_course_edit, methods=['GET'])
 
 
 if __name__ == "__main__":

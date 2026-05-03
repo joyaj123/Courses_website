@@ -309,3 +309,32 @@ def update_course_with_materials(course_id, title, description, cat_id, diff_id,
     finally:
         cursor.close()
         conn.close()
+
+
+def delete_course(course_id):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    try:
+        # Delete related materials first
+        cursor.execute("""
+            DELETE FROM Course_Materials
+            WHERE course_id = %s
+        """, (course_id,))
+
+        # Then delete the course
+        cursor.execute("""
+            DELETE FROM Courses
+            WHERE course_id = %s
+        """, (course_id,))
+
+        conn.commit()
+        return True
+
+    except Exception as e:
+        conn.rollback()
+        raise e
+
+    finally:
+        cursor.close()
+        conn.close()
