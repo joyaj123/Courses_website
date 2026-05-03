@@ -80,6 +80,15 @@ def get_user_by_id(user_id):
         SELECT user_id, username, email, role_id, created_at, updated_at
         FROM users
         WHERE user_id = %s
+        SELECT 
+            u.user_id,
+            u.username,
+            u.email,
+            u.role_id,
+            r.type AS role
+        FROM Users u
+        JOIN Role r ON u.role_id = r.role_id
+        WHERE u.user_id = %s
     """
     cursor.execute(query, (user_id,))
     user = cursor.fetchone()
