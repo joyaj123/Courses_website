@@ -47,11 +47,9 @@ def add_course():
     created_by = data.get("created_by")
 
     if not title or not description or not cat_id or not diff_id or not created_by:
-        return jsonify({
-            "message": "Missing required course fields"
-        }), 400
+        return jsonify({"message": "Missing required course fields"}), 400
 
-    content_url = None
+    content_url = data.get("content_url")
 
     if pdf:
         upload_folder = "uploads/materials"
@@ -59,15 +57,15 @@ def add_course():
 
         filename = secure_filename(pdf.filename)
         file_path = os.path.join(upload_folder, filename)
-
         pdf.save(file_path)
+
         content_url = file_path
 
     materials = [
         {
             "title": data.get("material_title"),
             "m_id": data.get("m_id"),
-            "content_url": data.get("content_url"),
+            "content_url": content_url,
             "content_text": data.get("content_text"),
             "order_index": data.get("order_index", 1)
         }
@@ -75,16 +73,12 @@ def add_course():
 
     for material in materials:
         if not material.get("title") or not material.get("m_id"):
-            return jsonify({
-                "message": "Each material must have title and m_id"
-            }), 400
+            return jsonify({"message": "Each material must have title and m_id"}), 400
 
     existing_course = course_title_exists(title)
 
     if existing_course:
-        return jsonify({
-            "message": "Course title already exists"
-        }), 409
+        return jsonify({"message": "Course title already exists"}), 409
 
     course_id = create_course_with_materials(
         title,

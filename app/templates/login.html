@@ -1,0 +1,239 @@
+
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>StudyGo | Sign In</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#f8f9fa",
+                        "error": "#ba1a1a",
+                        "primary-container": "#4f46e5",
+                        "surface-container-highest": "#e1e3e4",
+                        "surface-container": "#edeeef",
+                        "inverse-primary": "#c3c0ff",
+                        "on-secondary-fixed-variant": "#6900b3",
+                        "on-surface": "#191c1d",
+                        "primary-fixed": "#e2dfff",
+                        "on-secondary-container": "#fffbff",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#002113",
+                        "outline": "#777587",
+                        "on-primary-fixed": "#002113",
+                        "surface-dim": "#d9dadb",
+                        "surface-container-high": "#e7e8e9",
+                        "inverse-on-surface": "#f0f1f2",
+                        "secondary-fixed-dim": "#ddb7ff",
+                        "tertiary-fixed": "#6ffbbe",
+                        "tertiary-container": "#006e4b",
+                        "inverse-surface": "#2e3132",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "secondary-container": "#9c48ea",
+                        "surface-tint": "#4d44e3",
+                        "on-tertiary-container": "#67f4b7",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#f0dbff",
+                        "tertiary": "#005338",
+                        "on-tertiary": "#ffffff",
+                        "surface": "#f8f9fa",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#c7c4d8",
+                        "surface-bright": "#f8f9fa",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "on-surface-variant": "#464555",
+                        "secondary": "#8127cf",
+                        "primary": "#3525cd",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-background": "#191c1d",
+                        "on-primary-container": "#dad7ff",
+                        "surface-container-low": "#f3f4f5",
+                        "surface-variant": "#e1e3e4",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#2c0051"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            }
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+        }
+        .brand-gradient {
+            background: linear-gradient(135deg, #4f46e5 0%, #3525cd 100%);
+        }
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+
+
+<body class="bg-surface text-on-surface flex min-h-screen overflow-hidden">
+<!-- Brand Section (Left Side - Desktop) -->
+<aside class="hidden lg:flex lg:w-1/2 brand-gradient flex-col justify-between p-16 relative">
+<div class="z-10">
+<div class="flex items-center gap-3 text-on-primary mb-12">
+<span class="material-symbols-outlined text-4xl" data-icon="auto_stories">auto_stories</span>
+<span class="text-2xl font-black tracking-tighter uppercase">StudyGo</span>
+</div>
+<h1 class="text-5xl font-extrabold text-on-primary leading-tight tracking-tight mb-6 max-w-lg">
+                Your path to <br/>academic excellence.
+            </h1>
+<p class="text-on-primary-container text-lg max-w-md font-medium opacity-90 leading-relaxed">
+                The intelligent study platform designed for the modern learner. Streamline your curriculum and accelerate your growth with StudyGo.
+            </p>
+</div>
+<!-- Decorative illustration using UI patterns -->
+<div class="absolute bottom-0 right-0 w-3/4 h-3/4 opacity-10 pointer-events-none select-none overflow-hidden">
+<div class="grid grid-cols-6 gap-6 transform rotate-12 translate-x-24 translate-y-24">
+<div class="h-64 bg-white rounded-2xl shadow-xl"></div>
+<div class="h-80 bg-white rounded-2xl shadow-xl mt-12"></div>
+<div class="h-64 bg-white rounded-2xl shadow-xl -mt-8"></div>
+<div class="h-96 bg-white rounded-2xl shadow-xl"></div>
+<div class="h-72 bg-white rounded-2xl shadow-xl mt-24"></div>
+<div class="h-64 bg-white rounded-2xl shadow-xl"></div>
+</div>
+</div>
+</aside>
+<!-- Login Form Section (Right Side) -->
+<main class="w-full lg:w-1/2 flex items-center justify-center p-8 sm:p-12 lg:p-24 bg-surface-container-lowest relative">
+<div class="w-full max-w-md flex flex-col">
+<!-- Mobile Header Only -->
+<div class="lg:hidden flex items-center gap-2 mb-12">
+<span class="material-symbols-outlined text-primary text-3xl" data-icon="auto_stories">auto_stories</span>
+<span class="text-xl font-black tracking-tighter text-on-surface">StudyGo</span>
+</div>
+<div class="absolute top-4 right-8 lg:top-8 lg:right-12">
+<p class="text-sm font-medium text-on-surface-variant">
+        New to StudyGo? 
+        <a class="text-primary font-bold hover:underline underline-offset-4 ml-1" href="#">Create Account</a>
+</p>
+</div><div class="mb-10">
+<h2 class="text-3xl font-bold text-on-surface tracking-tight mb-2">Welcome Back</h2>
+<p class="text-on-surface-variant font-medium">Continue your learning journey today.</p>
+</div>
+<form id="loginForm" class="space-y-6">
+
+<!-- Email Input Group -->
+<div class="space-y-2">
+<label class="text-sm font-semibold text-on-surface tracking-tight" for="email">Email Address</label>
+<div class="relative flex items-center group">
+<span class="material-symbols-outlined absolute left-4 text-outline group-focus-within:text-primary transition-colors" data-icon="mail">mail</span>
+<input class="w-full bg-surface-container-low border-0 rounded-lg py-3.5 pl-12 pr-4 text-on-surface placeholder:text-outline/60 focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all" id="email" placeholder="alex.chen@university.edu" type="email"/>
+</div>
+</div>
+<!-- Password Input Group -->
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<label class="text-sm font-semibold text-on-surface tracking-tight" for="password">Password</label>
+<a class="text-xs font-bold text-primary hover:text-on-primary-fixed-variant transition-colors" href="#">Forgot Password?</a>
+</div>
+<div class="relative flex items-center group">
+<span class="material-symbols-outlined absolute left-4 text-outline group-focus-within:text-primary transition-colors" data-icon="lock">lock</span>
+<input class="w-full bg-surface-container-low border-0 rounded-lg py-3.5 pl-12 pr-12 text-on-surface placeholder:text-outline/60 focus:ring-2 focus:ring-primary/20 focus:bg-surface-container-lowest transition-all" id="password" placeholder="••••••••••••" type="password"/>
+<button class="absolute right-4 text-outline hover:text-on-surface transition-colors" type="button">
+<span class="material-symbols-outlined text-xl" data-icon="visibility">visibility</span>
+</button>
+</div>
+<!-- Validation Hint -->
+
+</div>
+    <div id="errorBox" class="hidden text-red-600 text-sm font-medium"></div>
+
+<!-- Action Button -->
+<button class="w-full brand-gradient text-on-primary py-4 rounded-lg font-bold text-base shadow-lg shadow-primary/20 active:scale-[0.98] transition-all flex items-center justify-center gap-2 mt-4" type="submit">
+                    Sign In
+                    <span class="material-symbols-outlined text-lg" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</form>
+<!-- Social/SSO Divider -->
+
+<!-- SSO Options -->
+
+<!-- Footer Link -->
+</div>
+</main>
+<!-- Support/Terms Floating Section (Desktop) -->
+<div class="fixed bottom-8 left-0 right-0 flex justify-center lg:justify-end lg:right-8 lg:left-auto px-8">
+<div class="flex items-center gap-6 text-xs font-bold text-outline uppercase tracking-widest">
+<a class="hover:text-primary transition-colors" href="#">Privacy Policy</a>
+<a class="hover:text-primary transition-colors" href="#">Terms of Use</a>
+<a class="hover:text-primary transition-colors" href="#">Support</a>
+</div>
+</div>
+</body>
+<script>
+const form = document.getElementById("loginForm");
+const errorBox = document.getElementById("errorBox");
+
+form.addEventListener("submit", async function(e) {
+    e.preventDefault();
+
+    // reset error
+    errorBox.classList.add("hidden");
+    errorBox.textContent = "";
+
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    try {
+        const response = await fetch("/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            showError(data.error || "Invalid credentials");
+            return;
+        }
+
+        // success
+        localStorage.setItem("token", data.token);
+        localStorage.setItem("user", JSON.stringify(data.user));
+
+        window.location.href = "/home"; 
+
+    } catch (error) {
+        showError("Server error. Please try again.");
+    }
+});
+
+function showError(message) {
+    errorBox.textContent = message;
+    errorBox.classList.remove("hidden");
+}
+</script>
+</html>
