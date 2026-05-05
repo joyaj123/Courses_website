@@ -178,14 +178,11 @@ body {
                     </div>
 
                     <div class="space-y-4 mb-6">
-                        <label class="block text-xs font-black text-on-surface-variant uppercase tracking-widest">
-                            Material Type ID
-                        </label>
-                        <input id="m_id" name="m_id" required
-                            class="w-full bg-surface-container-highest border-none rounded-lg p-4 focus:ring-2 focus:ring-primary/20 transition-all"
-                            placeholder="e.g. 1"
-                            value="1"
-                            type="number"/>
+                        <select name="material_type[]" required>
+    <option value="pdf">PDF</option>
+    <option value="article">Article</option>
+    <option value="link">Link</option>
+</select>
                     </div>
 
                     <input id="order_index" name="order_index" type="hidden" value="1"/>
