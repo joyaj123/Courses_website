@@ -6,16 +6,26 @@ from app.config.db import get_db_connection
 
 def create_user(username, email, password):
     conn = get_db_connection()
-    cursor = conn.cursor(dictionary=True)
+    cursor = conn.cursor(dictionary=True, buffered=True)
 
-    # Check if user exists
-    cursor.execute("SELECT * FROM Users WHERE email = %s", (email,))
-    if cursor.fetchone():
+    # Check if email or username already exists
+    cursor.execute(
+        "SELECT * FROM Users WHERE email = %s OR username = %s",
+        (email, username)
+    )
+    existing_user = cursor.fetchone()
+
+    if existing_user:
         cursor.close()
         conn.close()
-        return "exists"
 
-    #  GET learner role_id
+        if existing_user["email"] == email:
+            return "email_exists"
+
+        if existing_user["username"] == username:
+            return "username_exists"
+
+    # Get learner role_id
     cursor.execute("SELECT role_id FROM Role WHERE type = %s", ("learner",))
     role = cursor.fetchone()
 
@@ -29,18 +39,20 @@ def create_user(username, email, password):
     # Hash password
     hashed_password = generate_password_hash(password)
 
-    # Insert user WITH role_id
+    # Insert user
     query = """
-    INSERT INTO Users (username, email, password_hash, role_id)
-    VALUES (%s, %s, %s, %s)
+        INSERT INTO Users (username, email, password_hash, role_id)
+        VALUES (%s, %s, %s, %s)
     """
-    cursor.execute(query, (username, email, hashed_password, role_id))
 
+    cursor.execute(query, (username, email, hashed_password, role_id))
     conn.commit()
-    user_id = cursor.lastrowid  # 🔥 IMPORTANT
+
+    user_id = cursor.lastrowid
 
     cursor.close()
     conn.close()
+
     return user_id
 
 #retrieves a user from the database using email
@@ -67,7 +79,6 @@ def verify_user(email,password):
         return user
     return None
 
-    
 
     return "created"
 
