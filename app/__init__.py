@@ -25,6 +25,9 @@ def create_app():
     @app.route("/admin/courses/create")
     def create_course_page():
       return render_template("admin_create_course.html")
+    @app.route("/course-catalog")
+    def course_catalog_page():
+      return render_template("course_catalog.html")
 
     @app.route("/home")
     def home_page():

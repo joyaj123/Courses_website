@@ -67,7 +67,7 @@ def get_course_details_by_id(course_id):
         connection.close()
 from app.models.user import get_db_connection
 
-def get_user_enrolled_courses(user_id):
+def get_user_enrolled_courses(user_id, category=None):
     conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
 
@@ -89,17 +89,21 @@ def get_user_enrolled_courses(user_id):
             COUNT(cm.material_id) AS total_materials,
             MIN(cm.order_index) AS first_material_order
         FROM Enrollments e
-        INNER JOIN Courses c
-            ON e.course_id = c.course_id
-        INNER JOIN Status s
-            ON e.s_id = s.s_id
-        INNER JOIN Category cat
-            ON c.cat_id = cat.cat_id
-        INNER JOIN Difficulty d
-            ON c.diff_id = d.diff_id
-        LEFT JOIN Course_Materials cm
-            ON c.course_id = cm.course_id
+        INNER JOIN Courses c ON e.course_id = c.course_id
+        INNER JOIN Status s ON e.s_id = s.s_id
+        INNER JOIN Category cat ON c.cat_id = cat.cat_id
+        INNER JOIN Difficulty d ON c.diff_id = d.diff_id
+        LEFT JOIN Course_Materials cm ON c.course_id = cm.course_id
         WHERE e.user_id = %s
+    """
+
+    params = [user_id]
+
+    if category:
+        query += " AND cat.description = %s"
+        params.append(category)
+
+    query += """
         GROUP BY
             e.enrol_id,
             e.enrolled_at,
@@ -114,7 +118,7 @@ def get_user_enrolled_courses(user_id):
         ORDER BY e.enrolled_at DESC
     """
 
-    cursor.execute(query, (user_id,))
+    cursor.execute(query, params)
     courses = cursor.fetchall()
 
     cursor.close()
