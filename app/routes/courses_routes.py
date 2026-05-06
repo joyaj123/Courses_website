@@ -18,8 +18,10 @@ def get_my_courses():
 
     if not user_id:
         return jsonify({"error": "Invalid or missing token"}), 401
+     
+    category = request.args.get("category")
 
-    courses = get_user_enrolled_courses(user_id)
+    courses = get_user_enrolled_courses(user_id,category)
 
     return jsonify({
         "message": "Enrolled courses fetched successfully",
