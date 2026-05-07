@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#f8f9fa",
+                        "error": "#ba1a1a",
+                        "primary-container": "#4f46e5",
+                        "surface-container-highest": "#e1e3e4",
+                        "surface-container": "#edeeef",
+                        "inverse-primary": "#c3c0ff",
+                        "on-secondary-fixed-variant": "#6900b3",
+                        "on-surface": "#191c1d",
+                        "primary-fixed": "#e2dfff",
+                        "on-secondary-container": "#fffbff",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#002113",
+                        "outline": "#777587",
+                        "on-primary-fixed": "#0f0069",
+                        "surface-dim": "#d9dadb",
+                        "surface-container-high": "#e7e8e9",
+                        "inverse-on-surface": "#f0f1f2",
+                        "secondary-fixed-dim": "#ddb7ff",
+                        "tertiary-fixed": "#6ffbbe",
+                        "tertiary-container": "#006e4b",
+                        "inverse-surface": "#2e3132",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "secondary-container": "#9c48ea",
+                        "surface-tint": "#4d44e3",
+                        "on-tertiary-container": "#67f4b7",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#f0dbff",
+                        "tertiary": "#005338",
+                        "on-tertiary": "#ffffff",
+                        "surface": "#f8f9fa",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#c7c4d8",
+                        "surface-bright": "#f8f9fa",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "on-surface-variant": "#464555",
+                        "secondary": "#8127cf",
+                        "primary": "#3525cd",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-background": "#191c1d",
+                        "on-primary-container": "#dad7ff",
+                        "surface-container-low": "#f3f4f5",
+                        "surface-variant": "#e1e3e4",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#2c0051"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+    </style>
+<style>
+        body {
+            min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface">
+<!-- TopAppBar -->
+<header class="bg-white/80 backdrop-blur-md fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 shadow-sm">
+    <div class="flex items-center gap-4">
+        <span class="material-symbols-outlined text-on-surface cursor-pointer p-2 hover:bg-surface-container transition-colors rounded-full">menu</span>
+        <h1 class="text-xl font-bold text-on-surface tracking-tight">StudyGo Admin</h1>
+    </div>
+<div class="flex items-center gap-3">
+        <div class="text-right hidden sm:block">
+            <p class="text-sm font-bold text-on-surface">System Admin</p>
+            <p class="text-xs text-on-surface-variant leading-none">Management</p>
+        </div>
+        <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-white font-bold">
+            A
+        </div>
+    </div>
+</header>
+<!-- NavigationDrawer (Sidebar) -->
+<aside class="hidden md:flex flex-col p-4 space-y-2 h-screen w-72 border-r-0 fixed left-0 top-0 pt-20 bg-slate-50">
+<!-- Header Section (Profile) -->
+<!-- Nav Items -->
+<nav class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 hover:text-slate-900 hover:bg-slate-200/50 transition-all duration-300 ease-in-out font-inter text-sm font-medium" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 bg-indigo-50 text-indigo-700 rounded-lg transition-all duration-300 ease-in-out font-inter text-sm font-medium" href="#">
+<span class="material-symbols-outlined">school</span>
+                Courses
+            </a>
+<a class="flex items-center gap-3 px-3 py-2 text-slate-600 hover:text-slate-900 hover:bg-slate-200/50 transition-all duration-300 ease-in-out font-inter text-sm font-medium" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</nav>
+</aside>
+
+<!-- Main Content Canvas -->
+<main class="ml-0 md:ml-72 pt-24 p-8 min-h-screen">
+<div class="max-w-7xl mx-auto">
+<!-- Page Header Section -->
+<div class="flex flex-col md:flex-row justify-between items-end gap-6 mb-12">
+<div class="max-w-2xl">
+<h1 class="text-4xl font-extrabold tracking-tight text-on-surface mb-2">Manage Courses</h1>
+<p class="text-lg text-on-surface-variant font-body">Architecture, curriculum, and publication management for the technical syllabus.</p>
+</div>
+<button onclick="window.location.href='/admin/courses/create'"class="flex items-center gap-2 bg-primary text-white px-8 py-3.5 rounded-lg font-bold shadow-lg shadow-primary/20 hover:bg-indigo-700 hover:shadow-xl active:scale-95 transition-all duration-200">
+<span class="material-symbols-outlined text-xl">add_circle</span>
+<span class="tracking-tight">Create New Course</span>
+</button>
+</div>
+<div class="bg-surface-container-low p-6 rounded-xl mb-8">
+  
+  <div class="flex flex-wrap gap-4 items-center mb-6">
+   <div class="bg-slate-200 p-6 rounded-2xl mb-8">
+
+      <div class="flex items-center gap-4 mb-6">
+
+        <div class="flex-1 relative">
+
+          <span class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
+            search
+          </span>
+
+          <input type="text" placeholder="Search courses..."
+            class="w-full pl-12 pr-4 py-3 rounded-xl border-0 focus:ring-2 focus:ring-indigo-300" />
+
+        </div>
+
+        <button class="text-indigo-600 font-semibold px-4 py-2 hover:bg-white rounded-lg transition">
+          Clear All
+        </button>
+
+      </div>
+
+      <!-- CONTENT GRID -->
+      <div class="grid grid-cols-1 xl:grid-cols-4 gap-6">
+
+        <!-- TABLE -->
+        <div class="xl:col-span-3">
+
+          <div class="bg-white rounded-2xl shadow-sm overflow-hidden">
+
+            <table class="w-full">
+
+              <thead class="bg-slate-100">
+
+                <tr>
+
+                  <th class="text-left px-6 py-4 text-xs uppercase tracking-widest text-slate-500">
+                    Title
+                  </th>
+
+                  <th class="text-left px-6 py-4 text-xs uppercase tracking-widest text-slate-500">
+                    Category
+                  </th>
+
+                  <th class="text-left px-6 py-4 text-xs uppercase tracking-widest text-slate-500">
+                    Difficulty
+                  </th>
+
+                  <th class="text-right px-6 py-4 text-xs uppercase tracking-widest text-slate-500">
+                    Actions
+                  </th>
+
+                </tr>
+
+              </thead>
+
+              <tbody id="courses-table-body"></tbody>
+
+            </table>
+
+          </div>
+
+        </div>
+
+        <!-- STATS -->
+        <div class="space-y-4">
+
+          <div class="bg-white rounded-2xl p-6 shadow-sm">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm text-slate-500">Users</p>
+                <h3 id="users-count" class="text-3xl font-black mt-1">0</h3>
+              </div>
+
+              <div class="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center text-indigo-600">
+                <span class="material-symbols-outlined">group</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl p-6 shadow-sm">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm text-slate-500">Categories</p>
+                <h3  id="categories-count" class="text-3xl font-black mt-1">0</h3>
+              </div>
+
+              <div class="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center text-purple-600">
+                <span class="material-symbols-outlined">category</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white rounded-2xl p-6 shadow-sm">
+            <div class="flex items-center justify-between">
+              <div>
+                <p class="text-sm text-slate-500">Courses</p>
+                <h3 id="courses-count" class="text-3xl font-black mt-1">0</h3>
+              </div>
+
+              <div class="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center text-green-600">
+                <span class="material-symbols-outlined">menu_book</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <!-- DELETE MODAL -->
+  <div id="delete-modal"
+    class="fixed inset-0 z-50 hidden items-center justify-center p-4">
+
+    <!-- BACKDROP -->
+    <div class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+
+    <!-- MODAL -->
+    <div class="relative bg-white w-full max-w-md rounded-3xl shadow-2xl p-8">
+
+      <div class="flex flex-col items-center text-center">
+
+        <div class="w-16 h-16 rounded-full bg-red-100 flex items-center justify-center mb-6">
+          <span class="material-symbols-outlined text-red-600 text-4xl">
+            delete_forever
+          </span>
+        </div>
+
+        <h2 class="text-2xl font-black mb-3">
+          Delete Course?
+        </h2>
+
+        <p class="text-slate-500 mb-8">
+          This action is permanent and cannot be undone.
+        </p>
+
+        <div class="flex w-full gap-3">
+
+          <!-- CANCEL -->
+          <button id="close-modal"
+            class="flex-1 py-3 rounded-xl border border-slate-200 font-semibold hover:bg-slate-100 transition">
+            Cancel
+          </button>
+
+          <!-- DELETE -->
+          <button id="confirm-delete"
+            class="flex-1 py-3 rounded-xl bg-red-600 text-white font-semibold hover:bg-red-700 transition">
+            Delete
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+ <script>
+document.addEventListener("DOMContentLoaded", async () => {
+
+    let allCourses = [];
+    let selectedCourseId=null;
+
+    const modal = document.getElementById("delete-modal");
+    const closeBtn = document.getElementById("close-modal");
+
+    const searchInput = document.querySelector('input[placeholder="Search courses..."]');
+    const clearBtn = document.querySelector("button.text-indigo-600");
+
+    function renderCourses(courses) {
+
+        const tableBody = document.getElementById("courses-table-body");
+        tableBody.innerHTML = "";
+
+        courses.forEach(course => {
+
+            tableBody.innerHTML += `
+                <tr class="border-t hover:bg-slate-50 transition">
+
+                    <td class="px-6 py-5">
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-xl bg-indigo-100 flex items-center justify-center text-indigo-600">
+                                <span class="material-symbols-outlined">menu_book</span>
+                            </div>
+
+                            <div>
+                                <div class="font-semibold">${course.title}</div>
+                            </div>
+                        </div>
+                    </td>
+
+                    <td class="px-6 py-5">
+                        <span class="bg-purple-100 text-purple-700 px-3 py-1 rounded-full text-xs font-semibold">
+                            ${course.category}
+                        </span>
+                    </td>
+
+                    <td class="px-6 py-5">${course.difficulty}</td>
+
+                    <td class="px-6 py-5 text-right">
+    <div class="flex justify-end gap-2">
+
+     
+        <button 
+            class="edit-btn p-2 rounded-lg hover:bg-indigo-100 text-slate-500 hover:text-indigo-600 transition"
+            data-id="${course.course_id}">
+            <span class="material-symbols-outlined">edit</span>
+        </button>
+
+    
+        <button 
+            class="delete-btn p-2 rounded-lg hover:bg-red-100 text-slate-500 hover:text-red-600 transition"
+            data-id="${course.course_id}">
+            <span class="material-symbols-outlined">delete</span>
+        </button>
+
+    </div>
+</td>
+
+                </tr>
+            `;
+        });
+    }
+
+    async function loadDashboard() {
+
+        try {
+
+            const response = await fetch("/course-manage");
+            const data = await response.json();
+
+            allCourses = data.courses;
+            const stats = data.stats;
+
+            document.getElementById("users-count").textContent = stats.total_users;
+            document.getElementById("categories-count").textContent = stats.total_categories;
+            document.getElementById("courses-count").textContent = stats.total_courses;
+
+            renderCourses(allCourses);
+
+        } catch (err) {
+            console.error("Dashboard error:", err);
+        }
+    }
+
+    loadDashboard();
+    const confirmDeleteBtn = document.getElementById("confirm-delete");
+
+confirmDeleteBtn.addEventListener("click", async () => {
+
+    if (!selectedCourseId) return;
+
+    try {
+        const res = await fetch(`/courses/${selectedCourseId}`, {
+            method: "DELETE"
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+
+            // remove from UI immediately
+            allCourses = allCourses.filter(c => c.course_id != selectedCourseId);
+            renderCourses(allCourses);
+
+            closeModal();
+            selectedCourseId = null;
+
+        } else {
+            console.error(data.error);
+        }
+
+    } catch (err) {
+        console.error("Delete error:", err);
+    }
+});
+    
+    searchInput.addEventListener("input", (e) => {
+
+        const value = e.target.value.toLowerCase();
+
+        const filtered = allCourses.filter(course =>
+            course.title.toLowerCase().includes(value) ||
+            course.category.toLowerCase().includes(value) ||
+            course.difficulty.toLowerCase().includes(value)
+        );
+
+        renderCourses(filtered);
+    });
+
+    clearBtn.addEventListener("click", () => {
+
+        searchInput.value = "";
+        renderCourses(allCourses);
+
+    });
+    function closeModal() {
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+    }
+
+    closeBtn.addEventListener("click", closeModal);
+
+    modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal();
+    });
+
+    document.addEventListener("click", (e) => {
+
+    if (e.target.closest(".delete-btn")) {
+        const btn = e.target.closest(".delete-btn");
+        selectedCourseId = btn.dataset.id;
+
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+    }
+
+});
+
+});
+</script>
+
+</body></html>
