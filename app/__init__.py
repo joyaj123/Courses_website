@@ -8,7 +8,9 @@ from app.routes.courses_routes import (
     get_categories,
     add_course,
     get_course_edit,
-    edit_course
+    edit_course,
+    get_courses_dashboardadmin,
+    delete_course
 )
 from app.routes.course_details import course_details
 
@@ -25,6 +27,9 @@ def create_app():
     @app.route("/admin/courses/create")
     def create_course_page():
       return render_template("admin_create_course.html")
+    @app.route("/admin/manage-courses")
+    def create_manage_course_page():
+       return render_template("manage_courses_admin.html")
     @app.route("/course-catalog")
     def course_catalog_page():
       return render_template("course_catalog.html")
@@ -55,5 +60,7 @@ def create_app():
         view_func=learning_page,
         methods=["GET"]
     )
+    app.add_url_rule("/course-manage",view_func=get_courses_dashboardadmin,methods=["GET"])
+    app.add_url_rule("/courses/<int:course_id>", view_func=delete_course,methods=["DELETE"])
 
     return app
