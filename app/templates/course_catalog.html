@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Course Catalog | Editorial Engineering</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "background": "#f8f9fa",
+                        "error": "#ba1a1a",
+                        "primary-container": "#4f46e5",
+                        "surface-container-highest": "#e1e3e4",
+                        "surface-container": "#edeeef",
+                        "inverse-primary": "#c3c0ff",
+                        "on-secondary-fixed-variant": "#6900b3",
+                        "on-surface": "#191c1d",
+                        "primary-fixed": "#e2dfff",
+                        "on-secondary-container": "#fffbff",
+                        "on-secondary": "#ffffff",
+                        "on-tertiary-fixed": "#002113",
+                        "outline": "#777587",
+                        "on-primary-fixed": "#0f0069",
+                        "surface-dim": "#d9dadb",
+                        "surface-container-high": "#e7e8e9",
+                        "inverse-on-surface": "#f0f1f2",
+                        "secondary-fixed-dim": "#ddb7ff",
+                        "tertiary-fixed": "#6ffbbe",
+                        "tertiary-container": "#006e4b",
+                        "inverse-surface": "#2e3132",
+                        "surface-container-lowest": "#ffffff",
+                        "on-tertiary-fixed-variant": "#005236",
+                        "secondary-container": "#9c48ea",
+                        "surface-tint": "#4d44e3",
+                        "on-tertiary-container": "#67f4b7",
+                        "on-error-container": "#93000a",
+                        "secondary-fixed": "#f0dbff",
+                        "tertiary": "#005338",
+                        "on-tertiary": "#ffffff",
+                        "surface": "#f8f9fa",
+                        "error-container": "#ffdad6",
+                        "on-primary": "#ffffff",
+                        "outline-variant": "#c7c4d8",
+                        "surface-bright": "#f8f9fa",
+                        "on-primary-fixed-variant": "#3323cc",
+                        "on-surface-variant": "#464555",
+                        "secondary": "#8127cf",
+                        "primary": "#3525cd",
+                        "tertiary-fixed-dim": "#4edea3",
+                        "on-background": "#191c1d",
+                        "on-primary-container": "#dad7ff",
+                        "surface-container-low": "#f3f4f5",
+                        "surface-variant": "#e1e3e4",
+                        "primary-fixed-dim": "#c3c0ff",
+                        "on-error": "#ffffff",
+                        "on-secondary-fixed": "#2c0051"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["Inter"],
+                        "body": ["Inter"],
+                        "label": ["Inter"]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+        }
+        body {
+          min-height: max(884px, 100dvh);
+        }
+    </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-white/70 dark:bg-slate-900/70 backdrop-blur-xl shadow-sm dark:shadow-none flex items-center justify-between px-6 h-16">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-indigo-600 dark:text-indigo-400" data-icon="terminal">terminal</span>
+<span class="text-xl font-bold tracking-tighter text-slate-900 dark:text-slate-50">StudyGo</span>
+</div>
+<div class="flex items-center gap-4">
+
+
+</div>
+</header>
+<!-- NavigationDrawer (Sidebar) -->
+<aside class="hidden lg:flex flex-col p-4 space-y-2 h-screen fixed left-0 top-0 pt-20 bg-slate-50 dark:bg-slate-950 w-72 border-r-0 transition-all duration-300 ease-in-out">
+<div class="px-4 py-6 mb-4 flex items-center gap-3">
+
+
+<nav class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-300 ease-in-out font-inter text-sm font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 rounded-lg transition-all duration-300 ease-in-out font-inter text-sm font-medium" href="#">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+<span>Courses</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-slate-600 dark:text-slate-400 hover:bg-slate-200/50 dark:hover:bg-slate-800/50 rounded-lg transition-all duration-300 ease-in-out font-inter text-sm font-medium mt-auto" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content -->
+<main class="lg:pl-72 pt-16 min-h-screen">
+<div class="max-w-7xl mx-auto px-6 py-12">
+<!-- Header Section -->
+<div class="mb-16 md:flex items-end justify-between gap-12">
+<div class="max-w-2xl">
+<h1 class="text-5xl font-black tracking-tighter text-on-surface mb-4 leading-none">
+                    Master the <span class="text-primary">Architecture</span> of Code.
+                </h1>
+<p class="text-on-surface-variant text-lg leading-relaxed">
+                    Curated learning paths designed for the modern engineer. From systems design to low-level optimization, elevate your technical mastery through practice.
+                </p>
+</div>
+</div>
+
+<div class="flex gap-3 mb-8 flex-wrap">
+
+<div class="flex gap-3 mb-8 flex-wrap">
+
+  <button onclick="filterCourses(null, this)"
+    data-category="all"
+    class="filter-btn px-5 py-2 bg-indigo-600 text-white rounded-xl">
+    All
+  </button>
+
+  <button onclick="filterCourses('Frontend', this)"
+    class="filter-btn px-5 py-2 bg-gray-200 rounded-xl hover:bg-gray-300">
+    Frontend
+  </button>
+
+  <button onclick="filterCourses('Backend Development', this)"
+    class="filter-btn px-5 py-2 bg-gray-200 rounded-xl hover:bg-gray-300">
+    Backend
+  </button>
+
+  <button onclick="filterCourses('DevOps', this)"
+    class="filter-btn px-5 py-2 bg-gray-200 rounded-xl hover:bg-gray-300">
+    DevOps
+  </button>
+
+  <button onclick="filterCourses('Artificial Intelligence', this)"
+    class="filter-btn px-5 py-2 bg-gray-200 rounded-xl hover:bg-gray-300">
+    Artificial Intelligence
+  </button>
+
+  <button onclick="filterCourses('Systems Programming', this)"
+    class="filter-btn px-5 py-2 bg-gray-200 rounded-xl hover:bg-gray-300">
+    Systems Programming
+  </button>
+
+</div>
+
+</div>
+
+<!-- COURSE GRID -->
+<div id="courseGrid"
+     class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+</div>
+
+</main>
+</body>
+<script>
+    async function loadCourses(){
+        try{
+             const token = localStorage.getItem("token");
+             console.log("TOKEN:", token);
+            const res=await fetch("/my-courses",{
+                method:"GET",
+                headers: {
+                "Authorization": `Bearer ${token}`
+            }
+            });
+             if (!res.ok) {
+            throw new Error("Failed to fetch courses");
+        }
+        
+        const data= await res.json();
+        const container = document.querySelector(".grid");
+
+        container.innerHTML = ""; // clear static content
+
+        data.courses.forEach(course => {
+            const card = `
+<div class="flex flex-col bg-surface-container-lowest rounded-2xl border border-outline-variant/15 hover:shadow-lg transition-all group">
+    
+    <div class="p-6 flex flex-col flex-grow">
+
+        <h4 class="text-xl font-bold text-on-surface mb-2">
+            ${course.title}
+        </h4>
+
+        <p class="text-sm text-on-surface-variant mb-6 flex-grow">
+            ${course.description}
+        </p>
+
+       
+
+            <span class="text-xs font-bold text-outline uppercase tracking-wider">
+                ${course.difficulty}
+            </span>
+
+        <button onclick="goToDetails(${course.course_id})"
+            class="mt-4 text-primary font-bold text-sm flex items-center gap-1">
+            View Details
+        </button>
+
+    </div>
+</div>
+`;
+
+
+            container.innerHTML += card;
+        });
+    }catch(error){
+        console.error("error loading courses",error);
+    }
+    }
+    function goToDetails(courseId){
+        window.location.href = `course-details.html?id=${courseId}`;
+    }
+    loadCourses();
+    let activeButton = null;
+
+async function filterCourses(category, btn) {
+
+    const token = localStorage.getItem("token");
+
+   
+    if (activeButton) {
+        activeButton.classList.remove("bg-indigo-600", "text-white");
+        activeButton.classList.add("bg-gray-200");
+    }
+
+   
+    if (btn) {
+        btn.classList.remove("bg-gray-200");
+        btn.classList.add("bg-indigo-600", "text-white");
+        activeButton = btn;
+    }
+
+    let url = "/my-courses";
+
+    if (category) {
+        url += `?category=${category}`;
+    }
+
+    const res = await fetch(url, {
+        method: "GET",
+        headers: {
+            "Authorization": `Bearer ${token}`
+        }
+    });
+
+    const data = await res.json();
+
+    const container = document.getElementById("courseGrid");
+    container.innerHTML = "";
+
+    data.courses.forEach(course => {
+        container.innerHTML += `
+            <div class="flex flex-col bg-surface-container-lowest rounded-2xl border border-outline-variant/15 hover:shadow-lg transition-all group">
+                <div class="p-6 flex flex-col flex-grow">
+
+                    <h4 class="text-xl font-bold text-on-surface mb-2">
+                        ${course.title}
+                    </h4>
+
+                    <p class="text-sm text-on-surface-variant mb-6 flex-grow">
+                        ${course.description}
+                    </p>
+
+
+                        <span class="text-xs font-bold text-outline uppercase tracking-wider">
+                            ${course.difficulty}
+                        </span>
+                    
+
+                    <button onclick="goToDetails(${course.course_id})"
+                        class="mt-4 text-primary font-bold text-sm flex items-center gap-1">
+                        View Details
+                    </button>
+
+                </div>
+            </div>
+        `;
+    });
+}
+</script>
+</html>
