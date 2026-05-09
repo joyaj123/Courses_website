@@ -206,25 +206,39 @@ form.addEventListener("submit", async function(e) {
 
     try {
         const response = await fetch("/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({ email, password })
-        });
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+        email,
+        password
+    })
+});
 
-        const data = await response.json();
+const data = await response.json();
 
-        if (!response.ok) {
-            showError(data.error || "Invalid credentials");
-            return;
-        }
+console.log(data);
 
-        // success
-        localStorage.setItem("token", data.token);
-        localStorage.setItem("user", JSON.stringify(data.user));
+if (!response.ok) {
+    alert(data.error);
+    return;
+}
 
-        window.location.href = "/home"; 
+localStorage.setItem("token", data.token);
+localStorage.setItem("user", JSON.stringify(data.user));
+
+const roleId = data.user.role_id;
+
+if (roleId == 1) {
+    window.location.href = "/learning-dashboard";
+}
+else if (roleId == 2) {
+    window.location.href = "/admin-dashboard";
+}
+else {
+    window.location.href = "/";
+}
 
     } catch (error) {
         showError("Server error. Please try again.");
