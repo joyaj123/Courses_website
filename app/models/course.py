@@ -176,9 +176,16 @@ def create_course_with_materials(title, description, cat_id, diff_id, created_by
 
     try:
         cursor.execute("""
-            INSERT INTO Courses (title, description, cat_id, diff_id, created_by)
+            INSERT INTO Courses
+            (title, description, cat_id, diff_id, created_by)
             VALUES (%s, %s, %s, %s, %s)
-        """, (title, description, cat_id, diff_id, created_by))
+        """, (
+            title,
+            description,
+            cat_id,
+            diff_id,
+            created_by
+        ))
 
         course_id = cursor.lastrowid
 
@@ -190,10 +197,10 @@ def create_course_with_materials(title, description, cat_id, diff_id, created_by
             """, (
                 course_id,
                 material.get("title"),
-                material.get("m_id"),
+                material.get("m_id", 1),
                 material.get("content_url"),
                 material.get("content_text"),
-                material.get("order_index", 0)
+                material.get("order_index", 1)
             ))
 
         conn.commit()
