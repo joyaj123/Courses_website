@@ -1,4 +1,4 @@
-from flask import jsonify
+from flask import render_template
 from app.models.learning import get_learning_page_data
 
 
@@ -6,11 +6,6 @@ def learning_page(course_id, lesson_id):
     data = get_learning_page_data(course_id, lesson_id)
 
     if not data:
-        return jsonify({
-            "error": "Learning page data not found"
-        }), 404
+        return render_template("lesson_player.html", data=None, error="Lesson not found")
 
-    return jsonify({
-        "message": "Learning page loaded successfully",
-        "data": data
-    }), 200
+    return render_template("lesson_player.html", data=data)
