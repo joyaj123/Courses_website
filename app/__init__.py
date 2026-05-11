@@ -33,11 +33,6 @@ from app.routes.admin_course_routes import (
 def create_app():
     app = Flask(__name__)
 
-<<<<<<< feature/manage-admin
-    # HOME
-=======
-    # PAGE ROUTES
->>>>>>> main
     @app.route("/")
     def login_page():
         return render_template("login.html")
@@ -52,10 +47,20 @@ def create_app():
     @app.route("/course-catalog")
     def course_catalog_page():
       return render_template("course_catalog.html")
+    
+    @app.route('/admin-dashboard')
+    def admin_dashboard():
+        return render_template("admin_dashboard.html")
+    
+    @app.route('/learner-dashboard')
+    def learner_dashboard():
+        return render_template("learner_dashboard.html")
 
     @app.route("/home")
     def home_page():
         return "<h1>Welcome Home</h1>"
+        
+    
 
     # AUTH API ROUTES
     app.add_url_rule("/signup", view_func=signup, methods=["POST"])
