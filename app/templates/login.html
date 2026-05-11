@@ -134,7 +134,7 @@
 <div class="absolute top-4 right-8 lg:top-8 lg:right-12">
 <p class="text-sm font-medium text-on-surface-variant">
         New to StudyGo? 
-        <a class="text-primary font-bold hover:underline underline-offset-4 ml-1" href="signup-page">Create Account</a>
+        <a class="text-primary font-bold hover:underline underline-offset-4 ml-1" href="/signup-page">Create Account</a>
 </p>
 </div><div class="mb-10">
 <h2 class="text-3xl font-bold text-on-surface tracking-tight mb-2">Welcome Back</h2>
@@ -154,7 +154,6 @@
 <div class="space-y-2">
 <div class="flex justify-between items-center">
 <label class="text-sm font-semibold text-on-surface tracking-tight" for="password">Password</label>
-<a class="text-xs font-bold text-primary hover:text-on-primary-fixed-variant transition-colors" href="#">Forgot Password?</a>
 </div>
 <div class="relative flex items-center group">
 <span class="material-symbols-outlined absolute left-4 text-outline group-focus-within:text-primary transition-colors" data-icon="lock">lock</span>
@@ -206,39 +205,30 @@ form.addEventListener("submit", async function(e) {
 
     try {
         const response = await fetch("/login", {
-    method: "POST",
-    headers: {
-        "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-        email,
-        password
-    })
-});
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ email, password })
+        });
 
-const data = await response.json();
+        const data = await response.json();
 
-console.log(data);
+        if (!response.ok) {
+            showError(data.error || "Invalid credentials");
+            return;
+        }
 
-if (!response.ok) {
-    alert(data.error);
-    return;
-}
+       // success
+       localStorage.setItem("token", data.token);
+       localStorage.setItem("user", JSON.stringify(data.user));
 
-localStorage.setItem("token", data.token);
-localStorage.setItem("user", JSON.stringify(data.user));
-
-const roleId = data.user.role_id;
-
-if (roleId == 1) {
-    window.location.href = "/learning-dashboard";
-}
-else if (roleId == 2) {
+// redirect based on role
+    if (data.user.role_id === 1) {
+      window.location.href = "/learner-dashboard";
+    } else {
     window.location.href = "/admin-dashboard";
-}
-else {
-    window.location.href = "/";
-}
+} 
 
     } catch (error) {
         showError("Server error. Please try again.");

@@ -88,7 +88,7 @@ body {
     </div>
 
     <nav class="flex-1 space-y-1 px-3">
-        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-lg" href="#">
+        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-lg" href="/admin-dashboard">
             <span class="material-symbols-outlined">dashboard</span>
             <span class="font-medium text-sm">Dashboard</span>
         </a>
@@ -231,18 +231,15 @@ body {
                         </label>
 
                         <div class="relative">
-                            <select id="cat_id" name="cat_id" required
-                                class="w-full appearance-none bg-surface-container-highest border-none rounded-lg p-4 focus:ring-2 focus:ring-primary/20 text-sm font-medium text-on-surface cursor-pointer">
-                                <option value="">Select category</option>
-                                <option value="1">Software Architecture</option>
-                                <option value="2">Computer Science</option>
-                                <option value="3">Data Science</option>
-                                <option value="4">Machine Learning</option>
-                                <option value="5">Cybersecurity</option>
-                            </select>
-                            <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">expand_more</span>
-                        </div>
-                    </div>
+    <select id="cat_id" name="cat_id" required
+        class="w-full appearance-none bg-surface-container-highest border-none rounded-lg p-4 focus:ring-2 focus:ring-primary/20 text-sm font-medium text-on-surface cursor-pointer">
+        <option value="">Loading categories...</option>
+    </select>
+
+    <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">
+        expand_more
+    </span>
+</div>
 
                     <div class="space-y-4">
                         <label class="block text-xs font-black text-on-surface-variant uppercase tracking-widest">
@@ -336,6 +333,35 @@ const titleInput = document.getElementById("title");
 const descriptionInput = document.getElementById("description");
 const previewTitle = document.getElementById("previewTitle");
 const previewDescription = document.getElementById("previewDescription");
+
+async function loadCategories() {
+    try {
+        const response = await fetch("/categories");
+        const result = await response.json();
+
+        console.log("Categories response:", result);
+
+        const categorySelect = document.getElementById("cat_id");
+        categorySelect.innerHTML = '<option value="">Select category</option>';
+
+        const categories = Array.isArray(result) ? result : result.categories;
+
+        categories.forEach(category => {
+            categorySelect.innerHTML += `
+                <option value="${category.cat_id}">
+                    ${category.category_name}
+                </option>
+            `;
+        });
+
+    } catch (error) {
+        console.error("Failed to load categories:", error);
+        document.getElementById("cat_id").innerHTML =
+            '<option value="">Failed to load categories</option>';
+    }
+}
+
+loadCategories();
 
 pdfInput.addEventListener("change", function () {
     fileName.textContent = pdfInput.files.length > 0
