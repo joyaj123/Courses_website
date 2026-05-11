@@ -65,6 +65,14 @@ def create_app():
     
 
         return render_template("course_catalog.html")
+    
+    @app.route("/signup-page")
+    def signup_page():
+        return render_template("signup.html")
+    
+    @app.route("/profile")
+    def profile_page():
+         render_template("profile.html")
 
 
     # AUTH API
