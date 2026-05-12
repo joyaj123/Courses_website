@@ -28,6 +28,8 @@ from app.routes.admin_course_routes import (
 # Course details
 from app.routes.course_details import course_details
 
+# Profile route
+from app.routes.profile_routes import get_profile, update_profile
 
 def create_app():
     app = Flask(__name__)
@@ -70,9 +72,9 @@ def create_app():
     def signup_page():
         return render_template("signup.html")
     
-    @app.route("/profile")
+    @app.route("/profile-page")
     def profile_page():
-        return  render_template("profile.html")
+        return render_template("profile.html")
 
 
     # AUTH API
@@ -101,5 +103,9 @@ def create_app():
     app.add_url_rule("/courses/<int:course_id>", view_func=get_course_edit, methods=["GET"])
     app.add_url_rule("/courses/<int:course_id>", view_func=edit_course, methods=["PUT"])
     app.add_url_rule("/courses/<int:course_id>", view_func=delete_course, methods=["DELETE"])
+
+    # PROFILE API
+    app.add_url_rule("/profile", view_func=get_profile, methods=["GET"])
+    app.add_url_rule("/profile", view_func=update_profile, methods=["PUT"])
 
     return app
