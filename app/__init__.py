@@ -72,7 +72,7 @@ def create_app():
     
     @app.route("/profile")
     def profile_page():
-         render_template("profile.html")
+        return  render_template("profile.html")
 
 
     # AUTH API
