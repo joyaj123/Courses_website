@@ -29,6 +29,7 @@ from app.routes.admin_course_routes import (
 from app.routes.course_details import course_details
 
 
+
 def create_app():
     app = Flask(__name__)
 
@@ -48,6 +49,13 @@ def create_app():
     @app.route("/course-catalog")
     def course_catalog_page():
         return render_template("course_catalog.html")
+    
+    @app.route("/course-materials")
+    def course_materials_page():
+        return render_template("course_details.html")
+    @app.route("/learner")
+    def learner_page():
+       return render_template("lesson_player.html")
 
     # AUTH API
     app.add_url_rule("/signup", view_func=signup, methods=["POST"])
