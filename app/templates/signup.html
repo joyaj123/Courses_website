@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Sign Up | StudyGo</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<style>
+    .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    body {
+        font-family: 'Inter', sans-serif;
+        min-height: max(884px, 100dvh);
+    }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background: #e1e3e4; border-radius: 10px; }
+</style>
+<script id="tailwind-config">
+    tailwind.config = {
+        darkMode: "class",
+        theme: {
+            extend: {
+                colors: {
+                    "on-secondary": "#ffffff",
+                    "tertiary": "#005338",
+                    "surface-variant": "#e1e3e4",
+                    "on-tertiary": "#ffffff",
+                    "background": "#f8f9fa",
+                    "primary-fixed-dim": "#c3c0ff",
+                    "on-tertiary-fixed-variant": "#005236",
+                    "secondary-container": "#9c48ea",
+                    "primary": "#3525cd",
+                    "outline": "#777587",
+                    "on-secondary-fixed": "#2c0051",
+                    "on-secondary-fixed-variant": "#6900b3",
+                    "surface-container-highest": "#e1e3e4",
+                    "on-error-container": "#93000a",
+                    "inverse-primary": "#c3c0ff",
+                    "surface": "#f8f9fa",
+                    "error": "#ba1a1a",
+                    "primary-container": "#4f46e5",
+                    "on-tertiary-container": "#67f4b7",
+                    "on-secondary-container": "#fffbff",
+                    "on-error": "#ffffff",
+                    "inverse-surface": "#2e3132",
+                    "primary-fixed": "#e2dfff",
+                    "on-background": "#191c1d",
+                    "secondary-fixed-dim": "#ddb7ff",
+                    "surface-container-lowest": "#ffffff",
+                    "on-primary-fixed-variant": "#3323cc",
+                    "on-surface": "#191c1d",
+                    "secondary": "#8127cf",
+                    "on-primary-container": "#dad7ff",
+                    "surface-dim": "#d9dadb",
+                    "tertiary-fixed": "#6ffbbe",
+                    "on-primary": "#ffffff",
+                    "surface-bright": "#f8f9fa",
+                    "surface-container": "#edeeef",
+                    "surface-container-low": "#f3f4f5",
+                    "on-primary-fixed": "#0f0069",
+                    "inverse-on-surface": "#f0f1f2",
+                    "surface-tint": "#4d44e3",
+                    "error-container": "#ffdad6",
+                    "surface-container-high": "#e7e8e9",
+                    "outline-variant": "#c7c4d8",
+                    "tertiary-container": "#006e4b",
+                    "secondary-fixed": "#f0dbff",
+                    "on-surface-variant": "#464555",
+                    "tertiary-fixed-dim": "#4edea3",
+                    "on-tertiary-fixed": "#002113"
+                },
+                borderRadius: {
+                    "DEFAULT": "0.5rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+                }
+            }
+        }
+    }
+</script>
+</head>
+
+<body class="bg-surface text-on-surface min-h-screen flex flex-col selection:bg-primary-fixed-dim selection:text-on-primary-fixed">
+
+<!-- Header -->
+<header class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl transition-colors duration-200">
+    <nav class="max-w-[1440px] mx-auto flex items-center justify-between px-6 py-4 w-full">
+        <div class="flex items-center gap-2">
+            <div class="flex items-center justify-center w-10 h-10 rounded-xl bg-primary text-white">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">terminal</span>
+            </div>
+            <span class="text-xl font-bold tracking-tighter text-slate-900">StudyGo</span>
+        </div>
+        <div class="flex items-center gap-4">
+            <span class="hidden md:inline text-sm text-on-surface-variant">Already have an account?</span>
+            <a href="/" class="text-sm font-semibold text-primary hover:text-primary-container transition-colors px-4 py-2 rounded-lg hover:bg-surface-container-low">
+                Login
+            </a>
+        </div>
+    </nav>
+</header>
+
+<main class="flex-grow flex items-center justify-center pt-24 pb-12 px-6">
+    <div class="w-full max-w-5xl grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+
+        <!-- Left Side -->
+        <div class="lg:col-span-6 hidden lg:flex flex-col space-y-8 pr-12">
+            <div class="space-y-4">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed text-xs font-bold tracking-wide uppercase">
+                    <span class="material-symbols-outlined text-sm">school</span>
+                    Digital Architect Program
+                </div>
+                <h1 class="text-5xl font-extrabold tracking-tighter text-on-surface leading-[1.1]">
+                    Master the art of <span class="text-primary italic">Engineering</span> logic.
+                </h1>
+                <p class="text-lg text-on-surface-variant leading-relaxed max-w-md">
+                    Join an elite community of technical learners. From complex algorithms to system design, curate your professional growth.
+                </p>
+            </div>
+
+            <div class="relative">
+                <div class="absolute -top-4 -left-4 w-24 h-24 bg-primary-container/20 rounded-full blur-3xl"></div>
+                <div class="relative bg-white/70 backdrop-blur-xl border border-outline-variant/15 p-6 rounded-2xl shadow-2xl shadow-primary/5">
+                    <div class="flex items-center gap-4 mb-4">
+                        <div class="w-12 h-12 rounded-full bg-tertiary-fixed flex items-center justify-center text-on-tertiary-fixed">
+                            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">bolt</span>
+                        </div>
+                        <div>
+                            <h4 class="font-bold text-on-surface">Curated Curriculum</h4>
+                            <p class="text-sm text-on-surface-variant">85% average score increase</p>
+                        </div>
+                    </div>
+                    <div class="h-2 w-full bg-surface-container rounded-full overflow-hidden">
+                        <div class="h-full w-2/3 bg-primary rounded-full"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side — Form -->
+        <div class="lg:col-span-6 w-full">
+            <div class="bg-surface-container-lowest p-8 md:p-12 rounded-[2rem] shadow-sm ring-1 ring-outline-variant/10">
+
+                <div class="mb-8 text-center lg:text-left">
+                    <div class="lg:hidden flex justify-center mb-6">
+                        <div class="flex items-center justify-center w-14 h-14 rounded-2xl bg-primary text-white shadow-xl shadow-primary/20">
+                            <span class="material-symbols-outlined text-3xl" style="font-variation-settings: 'FILL' 1;">school</span>
+                        </div>
+                    </div>
+                    <h2 class="text-3xl font-bold tracking-tight mb-2">Create your account</h2>
+                    <p class="text-on-surface-variant">Start your technical journey today.</p>
+                </div>
+
+                <!-- Error / Success Box -->
+                <div id="messageBox" class="hidden mb-6 p-4 rounded-xl text-sm font-semibold"></div>
+
+                <form id="signupForm" class="space-y-6">
+
+                    <!-- Username -->
+                    <div class="space-y-2">
+                        <label class="block text-sm font-semibold text-on-surface ml-1" for="username">Username</label>
+                        <div class="relative group">
+                            <input
+                                class="w-full px-5 py-4 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all outline-none placeholder:text-outline-variant"
+                                id="username"
+                                placeholder="e.g. john_doe"
+                                type="text"
+                                required
+                            />
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="space-y-2">
+                        <label class="block text-sm font-semibold text-on-surface ml-1" for="email">Email Address</label>
+                        <input
+                            class="w-full px-5 py-4 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all outline-none placeholder:text-outline-variant"
+                            id="email"
+                            placeholder="name@company.com"
+                            type="email"
+                            required
+                        />
+                    </div>
+
+                    <!-- Password -->
+                    <div class="space-y-2">
+                        <label class="block text-sm font-semibold text-on-surface ml-1" for="password">Password</label>
+                        <div class="relative group">
+                            <input
+                                class="w-full px-5 py-4 bg-surface-container-highest border-none rounded-xl focus:ring-2 focus:ring-primary/20 focus:bg-white transition-all outline-none placeholder:text-outline-variant pr-14"
+                                id="password"
+                                placeholder="••••••••"
+                                type="password"
+                                required
+                            />
+                            <button
+                                type="button"
+                                id="togglePassword"
+                                class="absolute right-4 top-1/2 -translate-y-1/2 text-outline hover:text-on-surface transition-colors"
+                            >
+                                <span class="material-symbols-outlined text-xl">visibility</span>
+                            </button>
+                        </div>
+                        <p class="text-xs text-on-surface-variant ml-1">
+                            Min 8 characters with uppercase, lowercase, number and special character
+                        </p>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button
+                        id="submitBtn"
+                        class="w-full py-4 px-6 bg-gradient-to-r from-primary to-primary-container text-on-primary font-bold rounded-xl shadow-lg shadow-primary/25 hover:scale-[0.98] transition-transform flex items-center justify-center gap-2"
+                        type="submit"
+                    >
+                        Create Account
+                        <span class="material-symbols-outlined text-lg">arrow_forward</span>
+                    </button>
+
+                    <!-- Divider -->
+                    <div class="relative py-2">
+                        <div class="absolute inset-0 flex items-center">
+                            <div class="w-full border-t border-outline-variant/30"></div>
+                        </div>
+                        <div class="relative flex justify-center text-xs uppercase tracking-widest font-bold">
+                            <span class="bg-surface-container-lowest px-4 text-on-surface-variant">Or continue with</span>
+                        </div>
+                    </div>
+
+                    <!-- Social Buttons -->
+                    <div class="grid grid-cols-2 gap-4">
+                        <button class="flex items-center justify-center gap-3 px-4 py-3 rounded-xl bg-surface hover:bg-surface-container-low border border-outline-variant/20 transition-colors" type="button">
+                            <img alt="Google" class="w-5 h-5" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDgqzq4waY4EZkq7GHqnOrINChpyvUTOiM9lf1YXg8OzPt2SQrBUB_E7638vZVDLw2FnumfB3X5mN5IIQopCpKBaVTMSR4D0fF7m5AAl8HQqC4mXnSfQUqmHWCTxFA0PTTMAuLwx-hKku8mSWVfVw_uE7NWRDl6kUMkTt_VEElBKAaTtNL7otp6HmHMMadrK1kQHEPDi4FKLMK4w64zBE1WxwQRM3wDw1REK-7IQP2ktKVk824PZX9uiZV-eqD-4ZzcgLFSvMWhzag"/>
+                            <span class="text-sm font-semibold">Google</span>
+                        </button>
+                        <button class="flex items-center justify-center gap-3 px-4 py-3 rounded-xl bg-surface hover:bg-surface-container-low border border-outline-variant/20 transition-colors" type="button">
+                            <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                            <span class="text-sm font-semibold">GitHub</span>
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+    </div>
+</main>
+
+<!-- Footer -->
+<footer class="w-full py-12 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="flex items-center gap-4 text-sm text-slate-500">
+            <span>© 2024 StudyGo Editorial Engineering</span>
+        </div>
+        <div class="flex flex-wrap justify-center gap-8">
+            <a class="text-sm font-medium text-slate-500 hover:text-indigo-600 transition-colors" href="#">Privacy Policy</a>
+            <a class="text-sm font-medium text-slate-500 hover:text-indigo-600 transition-colors" href="#">Terms of Service</a>
+            <a class="text-sm font-medium text-slate-500 hover:text-indigo-600 transition-colors" href="#">Help Center</a>
+        </div>
+        <div class="flex items-center gap-4">
+            <div class="flex items-center gap-2 px-3 py-1 bg-white rounded-full border border-slate-200">
+                <div class="w-2 h-2 rounded-full bg-tertiary shadow-[0_0_8px_rgba(0,83,56,0.4)]"></div>
+                <span class="text-[10px] font-bold uppercase tracking-widest text-slate-500">Systems Operational</span>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<script>
+const form = document.getElementById("signupForm");
+const submitBtn = document.getElementById("submitBtn");
+const messageBox = document.getElementById("messageBox");
+const togglePassword = document.getElementById("togglePassword");
+const passwordInput = document.getElementById("password");
+
+// Toggle password visibility
+togglePassword.addEventListener("click", function () {
+    const isPassword = passwordInput.type === "password";
+    passwordInput.type = isPassword ? "text" : "password";
+    togglePassword.querySelector("span").textContent = isPassword ? "visibility_off" : "visibility";
+});
+
+// Show message helper
+function showMessage(message, type) {
+    messageBox.textContent = message;
+    messageBox.classList.remove("hidden");
+    if (type === "success") {
+        messageBox.className = "mb-6 p-4 rounded-xl text-sm font-semibold bg-green-100 text-green-700";
+    } else {
+        messageBox.className = "mb-6 p-4 rounded-xl text-sm font-semibold bg-red-100 text-red-700";
+    }
+}
+
+// Form submit
+form.addEventListener("submit", async function (e) {
+    e.preventDefault();
+
+    // Hide any previous message
+    messageBox.classList.add("hidden");
+
+    const username = document.getElementById("username").value.trim();
+    const email    = document.getElementById("email").value.trim();
+    const password = document.getElementById("password").value;
+
+    // Basic frontend validation
+    if (!username || !email || !password) {
+        showMessage("All fields are required.", "error");
+        return;
+    }
+
+    // Disable button while loading
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = `
+        <svg class="animate-spin w-5 h-5" fill="none" viewBox="0 0 24 24">
+            <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+            <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+        </svg>
+        Creating account...
+    `;
+
+    try {
+        const response = await fetch("/signup", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ username, email, password })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            // Show backend error message
+            showMessage(data.error || "Something went wrong. Please try again.", "error");
+            return;
+        }
+
+        // Save token and user to localStorage
+        localStorage.setItem("token", data.token);
+
+        // Show success then redirect
+        showMessage("Account created successfully! Redirecting...", "success");
+
+        setTimeout(() => {
+            window.location.href = "/course-catalog";
+        }, 1500);
+
+    } catch (error) {
+        showMessage("Server error. Please try again.", "error");
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = `
+            Create Account
+            <span class="material-symbols-outlined text-lg">arrow_forward</span>
+        `;
+    }
+});
+</script>
+
+</body>
+</html>

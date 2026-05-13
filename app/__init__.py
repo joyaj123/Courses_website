@@ -28,12 +28,15 @@ from app.routes.admin_course_routes import (
 # Course details
 from app.routes.course_details import course_details
 
+#profile route
+from app.routes.profile_routes import get_profile, update_profile
+
 
 
 def create_app():
     app = Flask(__name__)
 
-    # PAGES
+
     @app.route("/")
     def login_page():
         return render_template("login.html")
@@ -48,6 +51,23 @@ def create_app():
 
     @app.route("/course-catalog")
     def course_catalog_page():
+
+      return render_template("course_catalog.html")
+    
+    @app.route('/admin-dashboard')
+    def admin_dashboard():
+        return render_template("admin_dashboard.html")
+    
+    @app.route('/learner-dashboard')
+    def learner_dashboard():
+        return render_template("learner_dashboard.html")
+
+    @app.route("/home")
+    def home_page():
+        return "<h1>Welcome Home</h1>"
+        
+    
+
         return render_template("course_catalog.html")
     
     @app.route("/course-materials")
@@ -56,6 +76,14 @@ def create_app():
     @app.route("/learner")
     def learner_page():
        return render_template("lesson_player.html")
+    @app.route("/signup-page")
+    def signup_page():
+        return render_template("signup.html")
+    
+    @app.route("/profile-page")
+    def profile_page():
+        return  render_template("profile.html")
+
 
     # AUTH API
     app.add_url_rule("/signup", view_func=signup, methods=["POST"])
@@ -83,5 +111,9 @@ def create_app():
     app.add_url_rule("/courses/<int:course_id>", view_func=get_course_edit, methods=["GET"])
     app.add_url_rule("/courses/<int:course_id>", view_func=edit_course, methods=["PUT"])
     app.add_url_rule("/courses/<int:course_id>", view_func=delete_course, methods=["DELETE"])
-
+    
+    #PROFILE API
+    app.add_url_rule("/profile", view_func=get_profile, methods=["GET"])
+    app.add_url_rule("/profile", view_func=update_profile, methods=["PUT"])
+    
     return app
