@@ -32,6 +32,7 @@ from app.routes.course_details import course_details
 from app.routes.profile_routes import get_profile, update_profile
 
 
+
 def create_app():
     app = Flask(__name__)
 
@@ -69,6 +70,12 @@ def create_app():
 
         return render_template("course_catalog.html")
     
+    @app.route("/course-materials")
+    def course_materials_page():
+        return render_template("course_details.html")
+    @app.route("/learner")
+    def learner_page():
+       return render_template("lesson_player.html")
     @app.route("/signup-page")
     def signup_page():
         return render_template("signup.html")
