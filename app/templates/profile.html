@@ -101,24 +101,10 @@
     </div>
 </header>
 
-<!-- Sidebar -->
+<!-- Sidebar — rendered dynamically by JS -->
 <aside class="hidden lg:flex flex-col p-4 space-y-2 h-screen fixed left-0 top-0 pt-20 bg-slate-50 w-72 border-r border-outline-variant/20">
-    <nav class="space-y-1">
-        <a href="/course-catalog"
-            class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-200/50 rounded-lg transition-all text-sm font-medium">
-            <span class="material-symbols-outlined">dashboard</span>
-            <span>Dashboard</span>
-        </a>
-        <a href="/course-catalog"
-            class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-200/50 rounded-lg transition-all text-sm font-medium">
-            <span class="material-symbols-outlined">school</span>
-            <span>Courses</span>
-        </a>
-        <a href="/profile"
-            class="flex items-center gap-3 px-4 py-3 bg-indigo-50 text-indigo-700 rounded-lg transition-all text-sm font-medium">
-            <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
-            <span>Settings</span>
-        </a>
+    <nav id="sidebarNav" class="space-y-1">
+        <!-- Filled by JS based on role -->
     </nav>
 </aside>
 
@@ -127,7 +113,7 @@
 
     <!-- Page Header -->
     <div class="mb-12">
-        <h1 class="text-4xl font-black tracking-tight text-on-surface mb-2">Learner Profile</h1>
+        <h1 id="pageTitle" class="text-4xl font-black tracking-tight text-on-surface mb-2">Profile</h1>
         <p class="text-on-surface-variant max-w-2xl text-lg leading-relaxed font-light">
             Manage your professional identity and track your engineering mastery across the curriculum.
         </p>
@@ -151,8 +137,8 @@
                         <h2 id="profileUsername" class="text-2xl font-bold mb-1">Loading...</h2>
                         <p id="profileEmail" class="text-indigo-600 font-medium mb-4">Loading...</p>
                         <div class="flex flex-wrap justify-center md:justify-start gap-3">
-                            <span class="px-3 py-1 bg-indigo-50 text-indigo-700 text-xs font-bold rounded-full uppercase tracking-wider">
-                                Learner
+                            <span id="profileRole" class="px-3 py-1 bg-indigo-50 text-indigo-700 text-xs font-bold rounded-full uppercase tracking-wider">
+                                ...
                             </span>
                             <span id="profileMember" class="px-3 py-1 bg-gray-100 text-gray-600 text-xs font-semibold rounded-full">
                                 Member since ...
@@ -236,10 +222,10 @@
 
         </div>
 
-        <!-- Right Column — Enrolled Courses -->
+        <!-- Right Column — Enrolled Courses (only for learners) -->
         <div class="xl:col-span-5 space-y-6">
 
-            <section class="bg-white rounded-xl p-8 shadow-sm border border-gray-200">
+            <section id="coursesSection" class="bg-white rounded-xl p-8 shadow-sm border border-gray-200">
 
                 <h3 class="text-lg font-bold mb-6 flex items-center gap-2">
                     <span class="material-symbols-outlined text-indigo-600">school</span>
@@ -274,28 +260,109 @@
     </div>
 </main>
 
-<!-- Mobile Bottom Navigation -->
+<!-- Mobile Bottom Navigation — rendered dynamically by JS -->
 <nav class="md:hidden fixed bottom-0 left-0 w-full bg-white/70 backdrop-blur-xl border-t border-slate-100 z-50 flex justify-around items-center h-16 px-4">
-    <a href="/course-catalog" class="flex flex-col items-center gap-1 text-slate-500">
-        <span class="material-symbols-outlined">dashboard</span>
-        <span class="text-[10px] font-bold">DASHBOARD</span>
-    </a>
-    <a href="/course-catalog" class="flex flex-col items-center gap-1 text-slate-500">
-        <span class="material-symbols-outlined">school</span>
-        <span class="text-[10px] font-bold">COURSES</span>
-    </a>
-    <a href="/profile" class="flex flex-col items-center gap-1 text-primary">
-        <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
-        <span class="text-[10px] font-bold">SETTINGS</span>
-    </a>
+    <div id="mobileNav" class="flex justify-around items-center w-full">
+        <!-- Filled by JS based on role -->
+    </div>
 </nav>
 
 <script>
 const token = localStorage.getItem("token");
+const userStr = localStorage.getItem("user");
 
 // Redirect to login if no token
-if (!token) {
+if (!token || !userStr) {
     window.location.href = "/";
+}
+
+const currentUser = JSON.parse(userStr);
+const isAdmin = currentUser.role_id === 2;
+
+// --- Build navigation based on role ---
+function buildNav() {
+    const sidebarNav = document.getElementById("sidebarNav");
+    const mobileNav  = document.getElementById("mobileNav");
+
+    if (isAdmin) {
+        // Admin navigation
+        sidebarNav.innerHTML = `
+            <a href="/admin-dashboard"
+                class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-200/50 rounded-lg transition-all text-sm font-medium">
+                <span class="material-symbols-outlined">dashboard</span>
+                <span>Dashboard</span>
+            </a>
+            <a href="/admin/manage-courses"
+                class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-200/50 rounded-lg transition-all text-sm font-medium">
+                <span class="material-symbols-outlined">school</span>
+                <span>Manage Courses</span>
+            </a>
+            <a href="/profile-page"
+                class="flex items-center gap-3 px-4 py-3 bg-indigo-50 text-indigo-700 rounded-lg transition-all text-sm font-medium">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+                <span>Settings</span>
+            </a>
+        `;
+
+        mobileNav.innerHTML = `
+            <a href="/admin-dashboard" class="flex flex-col items-center gap-1 text-slate-500">
+                <span class="material-symbols-outlined">dashboard</span>
+                <span class="text-[10px] font-bold">DASHBOARD</span>
+            </a>
+            <a href="/admin/manage-courses" class="flex flex-col items-center gap-1 text-slate-500">
+                <span class="material-symbols-outlined">school</span>
+                <span class="text-[10px] font-bold">COURSES</span>
+            </a>
+            <a href="/profile-page" class="flex flex-col items-center gap-1 text-primary">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+                <span class="text-[10px] font-bold">SETTINGS</span>
+            </a>
+        `;
+
+        // Hide enrolled courses section for admin
+        document.getElementById("coursesSection").innerHTML = `
+            <div class="text-center py-8">
+                <span class="material-symbols-outlined text-4xl text-gray-300 mb-3 block">admin_panel_settings</span>
+                <p class="text-on-surface-variant text-sm font-medium">You are logged in as an Admin.</p>
+                <p class="text-on-surface-variant text-xs mt-1">Enrolled courses are only visible to learners.</p>
+            </div>
+        `;
+
+    } else {
+        // Learner navigation
+        sidebarNav.innerHTML = `
+            <a href="/learner-dashboard"
+                class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-200/50 rounded-lg transition-all text-sm font-medium">
+                <span class="material-symbols-outlined">dashboard</span>
+                <span>Dashboard</span>
+            </a>
+            <a href="/course-catalog"
+                class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-200/50 rounded-lg transition-all text-sm font-medium">
+                <span class="material-symbols-outlined">school</span>
+                <span>Courses</span>
+            </a>
+            <a href="/profile-page"
+                class="flex items-center gap-3 px-4 py-3 bg-indigo-50 text-indigo-700 rounded-lg transition-all text-sm font-medium">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+                <span>Settings</span>
+            </a>
+        `;
+
+        mobileNav.innerHTML = `
+            <a href="/learner-dashboard" class="flex flex-col items-center gap-1 text-slate-500">
+                <span class="material-symbols-outlined">dashboard</span>
+                <span class="text-[10px] font-bold">DASHBOARD</span>
+            </a>
+            <a href="/course-catalog" class="flex flex-col items-center gap-1 text-slate-500">
+                <span class="material-symbols-outlined">school</span>
+                <span class="text-[10px] font-bold">COURSES</span>
+            </a>
+            <a href="/profile-page" class="flex flex-col items-center gap-1 text-primary">
+                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">settings</span>
+                <span class="text-[10px] font-bold">SETTINGS</span>
+            </a>
+        `;
+    }
 }
 
 // --- Helper: show message ---
@@ -308,7 +375,6 @@ function showMessage(message, type) {
     } else {
         box.className = "mb-6 p-4 rounded-xl text-sm font-semibold bg-red-100 text-red-700";
     }
-    // Auto hide after 4 seconds
     setTimeout(() => {
         box.classList.add("hidden");
     }, 4000);
@@ -330,9 +396,22 @@ async function loadProfile() {
         const data = await res.json();
         const user = data.user;
 
+        // Update page title based on role
+        document.getElementById("pageTitle").textContent = isAdmin ? "Admin Profile" : "Learner Profile";
+        document.title = isAdmin ? "Admin Profile - StudyGo" : "Learner Profile - StudyGo";
+
         // Populate profile card
         document.getElementById("profileUsername").textContent = user.username;
         document.getElementById("profileEmail").textContent = user.email;
+
+        // Role badge — dynamic color for admin vs learner
+        const roleBadge = document.getElementById("profileRole");
+        roleBadge.textContent = isAdmin ? "Admin" : "Learner";
+        if (isAdmin) {
+            roleBadge.className = "px-3 py-1 bg-purple-50 text-purple-700 text-xs font-bold rounded-full uppercase tracking-wider";
+        } else {
+            roleBadge.className = "px-3 py-1 bg-indigo-50 text-indigo-700 text-xs font-bold rounded-full uppercase tracking-wider";
+        }
 
         // Format member since date
         const date = new Date(user.created_at);
@@ -348,8 +427,10 @@ async function loadProfile() {
     }
 }
 
-// --- Load enrolled courses ---
+// --- Load enrolled courses (learner only) ---
 async function loadCourses() {
+    if (isAdmin) return; // skip for admin
+
     try {
         const res = await fetch("/my-courses", {
             method: "GET",
@@ -370,7 +451,7 @@ async function loadCourses() {
 
         data.courses.forEach(course => {
             list.innerHTML += `
-                <div class="flex items-start gap-4 p-4 bg-slate-50 rounded-xl hover:bg-indigo-50 transition-colors group">
+                <div class="flex items-start gap-4 p-4 bg-slate-50 rounded-xl hover:bg-indigo-50 transition-colors">
                     <div class="w-10 h-10 rounded-lg bg-indigo-100 flex items-center justify-center flex-shrink-0">
                         <span class="material-symbols-outlined text-indigo-600 text-base">menu_book</span>
                     </div>
@@ -477,6 +558,7 @@ function handleLogout() {
 }
 
 // --- Init ---
+buildNav();
 loadProfile();
 loadCourses();
 </script>
