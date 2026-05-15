@@ -10,7 +10,7 @@ from app.models.course import (
     create_course_with_materials,
     get_course_for_edit,
     update_course_with_materials,
-    get_all_courses,
+    get_all_courses as model_get_all_courses,
     delete_course_by_id
 )
 from app.models.admin import(get_dashboard_stats)
@@ -30,6 +30,20 @@ def get_my_courses():
         "message": "Enrolled courses fetched successfully",
         "courses": courses
     }), 200
+
+def api_get_all_courses():
+
+    try:
+
+        courses = model_get_all_courses()
+
+        return jsonify(courses), 200
+
+    except Exception as e:
+
+        return jsonify({
+            "error": str(e)
+        }), 500
 
 
 
@@ -143,7 +157,7 @@ def edit_course(course_id):
     }), 200
 def get_courses_dashboardadmin():
     try:
-        courses=get_all_courses()
+        courses=model_get_all_courses()
         stats=get_dashboard_stats()
 
         return jsonify({
