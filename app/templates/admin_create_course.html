@@ -6,8 +6,9 @@
 <title>StudyGo Admin - Create New Course</title>
 
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
 
 <script id="tailwind-config">
 tailwind.config = {
@@ -53,61 +54,86 @@ tailwind.config = {
 </script>
 
 <style>
-body { font-family: 'Inter', sans-serif; }
-.material-symbols-outlined {
-    font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-}
 body {
-    min-height: max(884px, 100dvh);
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+}
+
+.material-symbols-outlined {
+    font-variation-settings:
+    'FILL' 0,
+    'wght' 400,
+    'GRAD' 0,
+    'opsz' 24;
 }
 </style>
 </head>
 
-<body class="bg-surface text-on-surface">
+<body class="bg-slate-100 text-slate-900">
 
-<header class="bg-white/80 backdrop-blur-md fixed top-0 w-full z-50 flex justify-between items-center px-6 h-16 shadow-sm">
-    <div class="flex items-center gap-4">
-        <span class="material-symbols-outlined text-on-surface cursor-pointer p-2 hover:bg-surface-container transition-colors rounded-full">menu</span>
-        <h1 class="text-xl font-bold text-on-surface tracking-tight">StudyGo Admin</h1>
+<!-- HEADER -->
+<header class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl shadow-sm flex items-center justify-between px-6 h-16">
+
+    <div class="flex items-center gap-3">
+        <span class="material-symbols-outlined text-indigo-600">terminal</span>
+        <span class="text-xl font-bold tracking-tighter">StudyGo</span>
     </div>
 
     <div class="flex items-center gap-3">
-        <div class="text-right hidden sm:block">
-            <p class="text-sm font-bold text-on-surface">System Admin</p>
-            <p class="text-xs text-on-surface-variant leading-none">Management</p>
-        </div>
-        <div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center text-white font-bold">
+        <div class="w-9 h-9 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold">
             A
         </div>
     </div>
+
 </header>
 
-<aside class="h-screen w-64 fixed left-0 top-0 bg-surface-container-lowest flex flex-col py-4 pt-20 hidden lg:flex border-r border-outline-variant">
-    <div class="px-6 mb-8">
-        <span class="text-2xl font-black tracking-tighter text-primary">StudyGo</span>
-    </div>
+<div class="flex min-h-screen pt-16">
 
-    <nav class="flex-1 space-y-1 px-3">
-        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-lg" href="/admin-dashboard">
-            <span class="material-symbols-outlined">dashboard</span>
-            <span class="font-medium text-sm">Dashboard</span>
+<!-- SIDEBAR -->
+<aside class="hidden lg:flex flex-col p-4 space-y-2 h-screen fixed left-0 top-0 pt-20 bg-slate-50 w-72">
+
+    <nav class="space-y-1">
+
+        <a href="/admin-dashboard"
+           class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-200 rounded-lg transition text-sm font-medium">
+
+            <span class="material-symbols-outlined">
+                dashboard
+            </span>
+
+            <span>Dashboard</span>
+
         </a>
 
-        <a href='/admin/manage-courses' class="flex items-center gap-3 px-4 py-3 bg-primary/10 text-primary rounded-lg" href="#">
-            <span class="material-symbols-outlined">school</span>
-            <span class="font-semibold text-sm">Courses</span>
+        <a href="/admin/manage-courses"
+           class="flex items-center gap-3 px-4 py-3 bg-indigo-50 text-indigo-700 rounded-lg transition text-sm font-medium">
+
+            <span class="material-symbols-outlined">
+                school
+            </span>
+
+            <span>Manage Courses</span>
+
         </a>
 
-        <a class="flex items-center gap-3 px-4 py-3 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-lg" href="#">
-            <span class="material-symbols-outlined">settings</span>
-            <span class="font-medium text-sm">Settings</span>
+        <a href="/profile-page"
+           class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-200 rounded-lg transition text-sm font-medium">
+
+            <span class="material-symbols-outlined">
+                settings
+            </span>
+
+            <span>Profile</span>
+
         </a>
+
     </nav>
+
 </aside>
 
-<main class="lg:ml-64 pt-24 pb-12 px-6 sm:px-10 max-w-7xl mx-auto">
+<main class="lg:pl-72 w-full pt-10 pb-12 px-6 sm:px-10">
 
-    <form id="createCourseForm">
+    <form id="createCourseForm" class="max-w-7xl mx-auto">
 
         <div class="mb-10 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
             <div>
@@ -178,11 +204,12 @@ body {
                     </div>
 
                     <div class="space-y-4 mb-6">
-                        <select name="material_type[]" required>
-    <option value="pdf">PDF</option>
-    <option value="article">Article</option>
-    <option value="link">Link</option>
-</select>
+                        <select name="material_type[]" required
+                            class="w-full bg-surface-container-highest border-none rounded-lg p-4 focus:ring-2 focus:ring-primary/20">
+                            <option value="pdf">PDF</option>
+                            <option value="article">Article</option>
+                            <option value="link">Link</option>
+                        </select>
                     </div>
 
                     <input id="order_index" name="order_index" type="hidden" value="1"/>
@@ -231,15 +258,16 @@ body {
                         </label>
 
                         <div class="relative">
-    <select id="cat_id" name="cat_id" required
-        class="w-full appearance-none bg-surface-container-highest border-none rounded-lg p-4 focus:ring-2 focus:ring-primary/20 text-sm font-medium text-on-surface cursor-pointer">
-        <option value="">Loading categories...</option>
-    </select>
+                            <select id="cat_id" name="cat_id" required
+                                class="w-full appearance-none bg-surface-container-highest border-none rounded-lg p-4 focus:ring-2 focus:ring-primary/20 text-sm font-medium text-on-surface cursor-pointer">
+                                <option value="">Loading categories...</option>
+                            </select>
 
-    <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">
-        expand_more
-    </span>
-</div>
+                            <span class="material-symbols-outlined absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-on-surface-variant">
+                                expand_more
+                            </span>
+                        </div>
+                    </div>
 
                     <div class="space-y-4">
                         <label class="block text-xs font-black text-on-surface-variant uppercase tracking-widest">
@@ -306,19 +334,19 @@ body {
 </main>
 
 <nav class="lg:hidden fixed bottom-0 left-0 w-full bg-white/80 backdrop-blur-md flex justify-around items-center h-16 z-50 shadow-[0_-2px_10px_rgba(0,0,0,0.05)] border-t border-outline-variant">
-    <a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+    <a class="flex flex-col items-center gap-1 text-on-surface-variant" href="/admin-dashboard">
         <span class="material-symbols-outlined">dashboard</span>
         <span class="text-[10px] font-medium">Dashboard</span>
     </a>
 
-    <a class="flex flex-col items-center gap-1 text-primary font-bold" href="#">
+    <a class="flex flex-col items-center gap-1 text-primary font-bold" href="/admin/manage-courses">
         <span class="material-symbols-outlined">school</span>
         <span class="text-[10px]">Courses</span>
     </a>
 
-    <a class="flex flex-col items-center gap-1 text-on-surface-variant" href="#">
+    <a class="flex flex-col items-center gap-1 text-on-surface-variant" href="/profile-page">
         <span class="material-symbols-outlined">settings</span>
-        <span class="text-[10px] font-medium">Settings</span>
+        <span class="text-[10px] font-medium">Profile</span>
     </a>
 </nav>
 

@@ -27,133 +27,263 @@
 
 <body class="bg-slate-100 text-slate-900">
 
-<!-- HEADER -->
 <header class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl shadow-sm flex items-center justify-between px-6 h-16">
 
     <div class="flex items-center gap-3">
+        <span class="material-symbols-outlined text-indigo-600">terminal</span>
+        <span class="text-xl font-bold tracking-tighter">StudyGo</span>
+    </div>
 
-        <span class="material-symbols-outlined text-indigo-600">
-            terminal
-        </span>
-
-        <span class="text-xl font-bold tracking-tighter">
-            StudyGo
-        </span>
-
+    <div class="flex items-center gap-3">
+        <div class="w-9 h-9 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center font-bold">
+            A
+        </div>
     </div>
 
 </header>
 
 <div class="flex min-h-screen pt-16">
 
-<!-- SIDEBAR -->
-<aside class="hidden lg:flex flex-col p-4 space-y-2 h-screen fixed left-0 top-0 pt-20 bg-slate-50 w-72">
+<aside class="hidden lg:flex flex-col p-4 h-screen fixed left-0 top-0 pt-20 bg-slate-50 w-72">
 
-    <nav class="space-y-1">
+    <nav class="space-y-1 flex-1">
 
-        <a href="/manage-courses"
-           class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-200 rounded-lg transition text-sm font-medium">
+        <a href="/admin-dashboard"
+           class="flex items-center gap-3 px-4 py-3 bg-indigo-50 text-indigo-700 rounded-lg transition text-sm font-medium">
 
-            <span class="material-symbols-outlined">
-                menu_book
-            </span>
-
-            <span>Manage Courses</span>
+            <span class="material-symbols-outlined">dashboard</span>
+            <span>Dashboard</span>
 
         </a>
 
-        <a href="/course-catalog"
+        <a href="/admin/manage-courses"
            class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-200 rounded-lg transition text-sm font-medium">
 
-            <span class="material-symbols-outlined">
-                school
-            </span>
-
-            <span>Courses</span>
+            <span class="material-symbols-outlined">school</span>
+            <span>Manage Courses</span>
 
         </a>
 
         <a href="/profile-page"
            class="flex items-center gap-3 px-4 py-3 text-slate-600 hover:bg-slate-200 rounded-lg transition text-sm font-medium">
 
-            <span class="material-symbols-outlined">
-                settings
-            </span>
-
-            <span>Settings</span>
+            <span class="material-symbols-outlined">settings</span>
+            <span>Profile</span>
 
         </a>
 
     </nav>
 
+    <!-- LOGOUT AT BOTTOM -->
+    <div class="border-t border-slate-200 pt-4">
+        <button onclick="logoutUser()"
+            class="w-full flex items-center gap-3 px-4 py-3 text-red-600 hover:bg-red-50 rounded-lg transition text-sm font-semibold">
+
+            <span class="material-symbols-outlined">logout</span>
+            <span>Logout</span>
+
+        </button>
+    </div>
+
 </aside>
 
-<!-- MAIN -->
 <main class="lg:pl-72 w-full">
 
-    <div class="max-w-6xl mx-auto px-6 py-10">
+    <div class="max-w-7xl mx-auto px-6 py-10 space-y-8">
 
-        <!-- TITLE -->
-        <div class="mb-8">
+        <section class="relative overflow-hidden rounded-3xl bg-slate-950 text-white p-8 md:p-10 shadow-xl">
 
-            <h1 class="text-3xl font-black tracking-tight">
-                Admin Dashboard
-            </h1>
+            <div class="absolute top-0 right-0 w-80 h-80 bg-indigo-500/30 rounded-full blur-3xl -mr-32 -mt-32"></div>
+            <div class="absolute bottom-0 left-0 w-72 h-72 bg-purple-500/20 rounded-full blur-3xl -ml-24 -mb-24"></div>
 
-        </div>
+            <div class="relative z-10 flex flex-col md:flex-row justify-between gap-8">
 
-        <!-- STATS -->
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <p class="text-indigo-300 font-bold text-xs uppercase tracking-widest mb-3">
+                        Admin Overview
+                    </p>
 
-            <!-- TOTAL COURSES -->
-            <div class="bg-white rounded-2xl border border-slate-200 p-7">
+                    <h1 class="text-4xl md:text-5xl font-black tracking-tight mb-4">
+                        Welcome back, Admin
+                    </h1>
 
-                <div class="flex items-center gap-2 text-xs uppercase tracking-widest font-bold text-indigo-600 mb-4">
-
-                    <span class="material-symbols-outlined text-sm">
-                        menu_book
-                    </span>
-
-                    Total Courses
-
+                    <p class="text-slate-300 max-w-2xl leading-relaxed">
+                        Monitor your StudyGo platform, track courses, follow registered learners,
+                        and manage learning content from one clean dashboard.
+                    </p>
                 </div>
 
-                <h3 id="totalCourses"
-                    class="text-4xl font-black mb-2">
+                <div class="bg-white/10 backdrop-blur-xl border border-white/10 rounded-2xl p-5 min-w-[230px]">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-11 h-11 rounded-xl bg-emerald-400/20 flex items-center justify-center">
+                            <span class="material-symbols-outlined text-emerald-300">database</span>
+                        </div>
+                        <div>
+                            <p class="text-sm font-bold">Database Status</p>
+                            <p class="text-xs text-slate-300">Connected</p>
+                        </div>
+                    </div>
 
-                    0
+                    <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+                        <div class="h-full w-[85%] bg-emerald-400 rounded-full"></div>
+                    </div>
 
-                </h3>
-
-                <p class="text-slate-500 text-sm">
-                    Active courses on the platform
-                </p>
+                    <p class="text-xs text-slate-400 mt-3">
+                        Live data loaded from backend
+                    </p>
+                </div>
 
             </div>
 
-            <!-- TOTAL STUDENTS -->
-            <div class="bg-white rounded-2xl border border-slate-200 p-7">
+        </section>
 
-                <div class="flex items-center gap-2 text-xs uppercase tracking-widest font-bold text-emerald-600 mb-4">
+        <section class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
 
-                    <span class="material-symbols-outlined text-sm">
-                        group
-                    </span>
+            <div class="bg-white rounded-3xl border border-slate-200 p-7 shadow-sm hover:shadow-md transition relative overflow-hidden">
+                <div class="absolute right-0 top-0 w-28 h-28 bg-indigo-50 rounded-full -mr-10 -mt-10"></div>
 
-                    Students
+                <div class="relative z-10">
+                    <div class="w-12 h-12 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center mb-5">
+                        <span class="material-symbols-outlined">menu_book</span>
+                    </div>
 
+                    <div class="text-xs uppercase tracking-widest font-bold text-indigo-600 mb-3">
+                        Total Courses
+                    </div>
+
+                    <h3 id="totalCourses" class="text-5xl font-black mb-2">0</h3>
+
+                    <p class="text-slate-500 text-sm">
+                        Active courses on the platform.
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl border border-slate-200 p-7 shadow-sm hover:shadow-md transition relative overflow-hidden">
+                <div class="absolute right-0 top-0 w-28 h-28 bg-emerald-50 rounded-full -mr-10 -mt-10"></div>
+
+                <div class="relative z-10">
+                    <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center mb-5">
+                        <span class="material-symbols-outlined">group</span>
+                    </div>
+
+                    <div class="text-xs uppercase tracking-widest font-bold text-emerald-600 mb-3">
+                        Students
+                    </div>
+
+                    <h3 id="totalStudents" class="text-5xl font-black mb-2">0</h3>
+
+                    <p class="text-slate-500 text-sm">
+                        Registered learners.
+                    </p>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-3xl border border-slate-200 p-7 shadow-sm hover:shadow-md transition">
+                <div class="w-12 h-12 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center mb-5">
+                    <span class="material-symbols-outlined">category</span>
                 </div>
 
-                <h3 id="totalStudents"
-                    class="text-4xl font-black mb-2">
+                <div class="text-xs uppercase tracking-widest font-bold text-purple-600 mb-3">
+                    Content Library
+                </div>
 
-                    0
-
-                </h3>
+                <h3 class="text-5xl font-black mb-2">Ready</h3>
 
                 <p class="text-slate-500 text-sm">
-                    Registered learners
+                    Courses can include descriptions, PDFs, and learning materials.
                 </p>
+            </div>
+
+            <div class="bg-white rounded-3xl border border-slate-200 p-7 shadow-sm hover:shadow-md transition">
+                <div class="w-12 h-12 rounded-2xl bg-orange-100 text-orange-600 flex items-center justify-center mb-5">
+                    <span class="material-symbols-outlined">admin_panel_settings</span>
+                </div>
+
+                <div class="text-xs uppercase tracking-widest font-bold text-orange-600 mb-3">
+                    Admin Tools
+                </div>
+
+                <h3 class="text-5xl font-black mb-2">Live</h3>
+
+                <p class="text-slate-500 text-sm">
+                    Manage courses and platform content from the dashboard.
+                </p>
+            </div>
+
+        </section>
+
+        <section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+            <div class="lg:col-span-7 bg-white rounded-3xl border border-slate-200 p-8 shadow-sm">
+
+                <div class="flex items-center justify-between mb-7">
+                    <div>
+                        <h2 class="text-2xl font-black tracking-tight">
+                            Platform Summary
+                        </h2>
+                        <p class="text-sm text-slate-500 mt-1">
+                            Quick overview based on your current database numbers.
+                        </p>
+                    </div>
+
+                    <span class="px-3 py-1 rounded-full text-xs font-bold bg-indigo-50 text-indigo-700">
+                        Backend Data
+                    </span>
+                </div>
+
+                <div class="space-y-5">
+
+                    <div class="flex gap-4 p-4 rounded-2xl bg-slate-50">
+                        <div class="w-11 h-11 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center">
+                            <span class="material-symbols-outlined">school</span>
+                        </div>
+
+                        <div>
+                            <p class="text-sm text-slate-700">
+                                Your platform currently contains
+                                <span id="coursesText" class="font-bold text-slate-900">0 courses</span>.
+                            </p>
+                            <p class="text-xs text-slate-400 mt-1">
+                                This value comes from your Courses table.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 p-4 rounded-2xl bg-slate-50">
+                        <div class="w-11 h-11 rounded-xl bg-emerald-100 text-emerald-600 flex items-center justify-center">
+                            <span class="material-symbols-outlined">person</span>
+                        </div>
+
+                        <div>
+                            <p class="text-sm text-slate-700">
+                                You have
+                                <span id="studentsText" class="font-bold text-slate-900">0 registered learners</span>
+                                using StudyGo.
+                            </p>
+                            <p class="text-xs text-slate-400 mt-1">
+                                This value comes from your Users table.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="flex gap-4 p-4 rounded-2xl bg-slate-50">
+                        <div class="w-11 h-11 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center">
+                            <span class="material-symbols-outlined">tips_and_updates</span>
+                        </div>
+
+                        <div>
+                            <p class="text-sm text-slate-700">
+                                Keep the dashboard useful by updating course titles, descriptions,
+                                difficulty levels, and course materials.
+                            </p>
+                            <p class="text-xs text-slate-400 mt-1">
+                                Static reminder for admin organization.
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
 
             </div>
 
@@ -175,13 +305,14 @@ async function loadDashboardStats() {
 
         const data = await response.json();
 
-        // TOTAL COURSES
-        document.getElementById('totalCourses').textContent =
-            data.stats.total_courses;
+        const totalCourses = data.stats.total_courses ?? 0;
+        const totalUsers = data.stats.total_users ?? 0;
 
-        // TOTAL STUDENTS
-        document.getElementById('totalStudents').textContent =
-            data.stats.total_users;
+        document.getElementById('totalCourses').textContent = totalCourses;
+        document.getElementById('totalStudents').textContent = totalUsers;
+
+        document.getElementById('coursesText').textContent = totalCourses + ' courses';
+        document.getElementById('studentsText').textContent = totalUsers + ' registered learners';
 
     } catch (error) {
 
@@ -189,6 +320,22 @@ async function loadDashboardStats() {
 
     }
 
+}
+
+async function logoutUser() {
+
+    try {
+        await fetch("/logout", {
+            method: "POST"
+        });
+    } catch (error) {
+        console.error("Logout backend error:", error);
+    }
+
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+
+    window.location.href = "/";
 }
 
 loadDashboardStats();
