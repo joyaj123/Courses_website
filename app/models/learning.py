@@ -76,3 +76,111 @@ def get_learning_page_data(course_id, lesson_id):
             for lesson in lessons
         ]
     }
+
+from app.config.db import get_db_connection
+
+
+def enroll_user_in_course(user_id, course_id):
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    try:
+        # Check if course exists
+        cursor.execute("""
+            SELECT course_id
+            FROM Courses
+            WHERE course_id = %s
+        """, (course_id,))
+
+        course = cursor.fetchone()
+
+        if not course:
+            return {
+                "success": False,
+                "message": "Course not found"
+            }
+
+        # Check if already enrolled
+        cursor.execute("""
+            SELECT enrol_id
+            FROM Enrollments
+            WHERE user_id = %s AND course_id = %s
+        """, (user_id, course_id))
+
+        existing = cursor.fetchone()
+
+        if existing:
+            return {
+                "success": False,
+                "message": "Already enrolled"
+            }
+
+        # s_id = 3 means enrolled
+        cursor.execute("""
+            INSERT INTO Enrollments (user_id, course_id, s_id)
+            VALUES (%s, %s, %s)
+        """, (user_id, course_id, 3))
+
+        conn.commit()
+
+        return {
+            "success": True,
+            "message": "Enrolled successfully"
+        }
+
+    except Exception as e:
+        conn.rollback()
+        return {
+            "success": False,
+            "message": str(e)
+        }
+
+    finally:
+        cursor.close()
+        conn.close()
+
+
+def is_user_enrolled(user_id, course_id):
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    try:
+        cursor.execute("""
+            SELECT enrol_id
+            FROM Enrollments
+            WHERE user_id = %s AND course_id = %s
+        """, (user_id, course_id))
+
+        return cursor.fetchone() is not None
+
+    finally:
+        cursor.close()
+        conn.close()
+
+
+def get_user_enrolled_courses(user_id):
+    conn = get_db_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    try:
+        cursor.execute("""
+            SELECT
+                c.course_id,
+                c.title,
+                c.description,
+                cat.description AS category,
+                d.level AS difficulty,
+                e.enrolled_at
+            FROM Enrollments e
+            JOIN Courses c ON e.course_id = c.course_id
+            JOIN Category cat ON c.cat_id = cat.cat_id
+            JOIN Difficulty d ON c.diff_id = d.diff_id
+            WHERE e.user_id = %s
+            ORDER BY e.enrolled_at DESC
+        """, (user_id,))
+
+        return cursor.fetchall()
+
+    finally:
+        cursor.close()
+        conn.close()
