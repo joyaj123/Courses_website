@@ -13,7 +13,8 @@ from app.routes.courses_routes import (
     get_my_courses,
     get_categories,
     get_courses_dashboardadmin,
-    delete_course
+    delete_course,
+    api_get_all_courses
 )
 
 
@@ -95,6 +96,11 @@ def create_app():
     app.add_url_rule("/me", view_func=get_me, methods=["GET"])
 
     # COURSES API
+    app.add_url_rule(
+    "/api/courses",
+    view_func=api_get_all_courses,
+    methods=["GET"]
+)
     app.add_url_rule("/my-courses", view_func=get_my_courses, methods=["GET"])
     app.add_url_rule("/categories", view_func=get_categories, methods=["GET"])
     app.add_url_rule("/course-manage", view_func=get_courses_dashboardadmin, methods=["GET"])
