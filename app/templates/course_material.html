@@ -1,181 +1,310 @@
 <!DOCTYPE html>
-<html class="light" lang="en">
-
+<html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 
-  <title>{{ material.title }} | StudyGo</title>
+<title>{{ material.title }} | StudyGo</title>
 
-  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script src="https://cdn.tailwindcss.com"></script>
 
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
 
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<style>
+body {
+  font-family: Inter, sans-serif;
+  min-height: 100vh;
+}
 
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      background: #f8f9fa;
-    }
-
-    .material-symbols-outlined {
-      font-variation-settings: 'FILL' 0,
-      'wght' 400,
-      'GRAD' 0,
-      'opsz' 24;
-    }
-  </style>
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24;
+}
+</style>
 </head>
 
-<body class="bg-slate-50 text-slate-900">
+<body class="bg-slate-950 text-slate-900">
 
 {% if error %}
 
-<h1 class="text-center text-red-600 text-3xl pt-20">
-  {{ error }}
-</h1>
+<div class="min-h-screen flex items-center justify-center px-6">
+  <div class="bg-white rounded-3xl border border-red-100 shadow-xl p-10 text-center max-w-lg">
+    <div class="w-16 h-16 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center mx-auto mb-5">
+      <span class="material-symbols-outlined text-4xl">error</span>
+    </div>
+
+    <h1 class="text-3xl font-black text-red-600 mb-3">
+      {{ error }}
+    </h1>
+
+    <a href="/course-catalog"
+       class="inline-flex items-center gap-2 mt-5 px-5 py-3 rounded-xl bg-slate-100 text-slate-700 font-bold hover:bg-slate-200 transition">
+      Back to Courses
+    </a>
+  </div>
+</div>
 
 {% else %}
 
-<!-- NAVBAR -->
-<header class="fixed top-0 w-full z-50 bg-white/70 backdrop-blur-xl shadow-sm flex justify-between items-center px-6 h-16">
+<header class="fixed top-0 w-full z-50 bg-white/80 backdrop-blur-xl shadow-sm flex justify-between items-center px-6 h-16">
 
   <div class="flex items-center gap-3">
-    <span class="material-symbols-outlined text-indigo-600">
-      terminal
-    </span>
-
-    <span class="text-xl font-bold tracking-tighter text-slate-900">
-      StudyGo
-    </span>
+    <span class="material-symbols-outlined text-indigo-600">terminal</span>
+    <span class="text-xl font-bold tracking-tighter text-slate-900">StudyGo</span>
   </div>
 
-  <nav class="hidden md:flex gap-6">
-
-    <a class="text-indigo-600 font-semibold" href="/course-catalog">
-      Courses
-    </a>
-
-    <a class="text-slate-600" href="/learner-dashboard">
-      Dashboard
-    </a>
-
-    <a class="text-slate-600" href="/profile-page">
-      Profile
-    </a>
-
+  <nav class="hidden md:flex gap-6 text-sm font-semibold">
+    <a class="text-indigo-600" href="/course-catalog">Courses</a>
+    <a class="text-slate-600 hover:text-indigo-600 transition" href="/learner-dashboard">Dashboard</a>
+    <a class="text-slate-600 hover:text-indigo-600 transition" href="/profile-page">Profile</a>
   </nav>
 
 </header>
 
-<!-- MAIN -->
-<main class="pt-28 pb-20">
+<main class="pt-16">
 
-  <div class="max-w-5xl mx-auto px-6">
+  <!-- TOP BANNER -->
+  <section class="relative overflow-hidden px-6 py-10">
 
-    <!-- LESSON HEADER -->
-    <div class="mb-12">
+    <div class="absolute top-0 right-0 w-96 h-96 bg-indigo-500/30 rounded-full blur-3xl -mr-40 -mt-40"></div>
+    <div class="absolute bottom-0 left-0 w-96 h-96 bg-purple-500/20 rounded-full blur-3xl -ml-40 -mb-40"></div>
 
-      <div class="flex items-center gap-2 text-indigo-600 font-bold text-xs tracking-widest uppercase mb-4">
+    <div class="relative max-w-7xl mx-auto">
 
-        <span class="material-symbols-outlined text-base">
-          school
-        </span>
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
 
-        <span>
-          Course Material
-        </span>
+        <!-- LEFT HERO CARD -->
+        <section class="lg:col-span-8 bg-white rounded-3xl p-8 md:p-10 shadow-2xl">
+
+          <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-50 text-indigo-700 text-xs font-bold uppercase tracking-widest mb-6">
+            <span class="material-symbols-outlined text-sm">menu_book</span>
+            Course Material
+          </div>
+
+          <h1 class="text-4xl md:text-6xl font-black tracking-tight leading-tight mb-5 text-slate-950">
+            {{ material.title }}
+          </h1>
+
+          <p class="text-slate-500 max-w-2xl leading-relaxed">
+            View the lesson content, preview the attached PDF, or open the material in a new tab.
+          </p>
+
+        </section>
+
+        <!-- RIGHT TYPE CARD -->
+        <section class="lg:col-span-4 bg-gradient-to-br from-indigo-600 to-slate-950 rounded-3xl p-8 shadow-2xl text-white flex flex-col justify-between min-h-[260px]">
+
+          <div class="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur flex items-center justify-center">
+            {% if material.content_url %}
+              <span class="material-symbols-outlined text-5xl">picture_as_pdf</span>
+            {% elif material.content_text %}
+              <span class="material-symbols-outlined text-5xl">article</span>
+            {% else %}
+              <span class="material-symbols-outlined text-5xl">folder</span>
+            {% endif %}
+          </div>
+
+          <div>
+            <p class="text-white/60 text-xs font-bold uppercase tracking-widest mb-2">
+              Material Type
+            </p>
+
+            <h2 class="text-3xl font-black">
+              {% if material.content_url %}
+                Attached Resource
+              {% elif material.content_text %}
+                Text Lesson
+              {% else %}
+                Empty Material
+              {% endif %}
+            </h2>
+          </div>
+
+        </section>
 
       </div>
 
-      <h1 class="text-5xl font-extrabold tracking-tighter text-slate-900 mb-6 leading-tight">
+    </div>
 
-        {{ material.title }}
+  </section>
 
-      </h1>
+  <!-- PAGE BODY -->
+  <section class="bg-slate-100 rounded-t-[2rem] px-6 py-12">
 
-      <div class="flex items-center gap-6">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
 
-        <div class="flex items-center gap-2">
+      <!-- MAIN COLUMN -->
+      <div class="lg:col-span-8 space-y-8">
 
-          <span class="material-symbols-outlined text-slate-400">
-            menu_book
-          </span>
+        <!-- TEXT CONTENT -->
+        <article class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
 
-          <span class="text-sm font-medium text-slate-500">
+          <div class="px-8 py-6 border-b border-slate-100 flex items-center justify-between gap-4">
+            <div>
+              <h2 class="text-2xl font-black tracking-tight">
+                Lesson Content
+              </h2>
 
-            {{ material.material_type }}
+              <p class="text-sm text-slate-500 mt-1">
+                Written content connected to this material.
+              </p>
+            </div>
 
-          </span>
+            <div class="w-12 h-12 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center">
+              <span class="material-symbols-outlined">description</span>
+            </div>
+          </div>
+
+          <div class="p-8">
+
+            {% if material.content_text %}
+              <div class="text-lg text-slate-700 leading-relaxed whitespace-pre-line">
+                {{ material.content_text }}
+              </div>
+            {% else %}
+              <div class="bg-slate-50 rounded-2xl p-10 text-center">
+                <div class="w-16 h-16 rounded-2xl bg-indigo-100 text-indigo-600 flex items-center justify-center mx-auto mb-4">
+                  <span class="material-symbols-outlined text-4xl">article</span>
+                </div>
+
+                <h3 class="text-xl font-black mb-2">No written content</h3>
+
+                <p class="text-slate-500">
+                  This material does not have text content. Use the attached file or link if available.
+                </p>
+              </div>
+            {% endif %}
+
+          </div>
+
+        </article>
+
+        <!-- PDF PREVIEW -->
+        {% if material.content_url and material.content_url.endswith('.pdf') %}
+        <article class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+
+          <div class="px-8 py-6 border-b border-slate-100 flex items-center justify-between gap-4">
+            <div>
+              <h2 class="text-2xl font-black tracking-tight">
+                PDF Preview
+              </h2>
+
+              <p class="text-sm text-slate-500 mt-1">
+                Preview the uploaded file directly inside the page.
+              </p>
+            </div>
+
+            <div class="w-12 h-12 rounded-2xl bg-red-100 text-red-600 flex items-center justify-center">
+              <span class="material-symbols-outlined">picture_as_pdf</span>
+            </div>
+          </div>
+
+          <div class="p-4 bg-slate-50">
+
+            {% if material.content_url.startswith('uploads/') %}
+              <iframe src="/{{ material.content_url }}"
+                      class="w-full h-[650px] rounded-2xl border border-slate-200 bg-white">
+              </iframe>
+            {% else %}
+              <iframe src="{{ material.content_url }}"
+                      class="w-full h-[650px] rounded-2xl border border-slate-200 bg-white">
+              </iframe>
+            {% endif %}
+
+          </div>
+
+        </article>
+        {% endif %}
+
+      </div>
+
+      <!-- SIDEBAR -->
+      <aside class="lg:col-span-4">
+        <div class="sticky top-24 space-y-5">
+
+          <!-- ACTION CARD -->
+          <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6">
+
+            <div class="h-36 rounded-2xl bg-slate-950 flex items-center justify-center mb-6">
+              {% if material.content_url %}
+                <span class="material-symbols-outlined text-white text-6xl">open_in_new</span>
+              {% elif material.content_text %}
+                <span class="material-symbols-outlined text-white text-6xl">article</span>
+              {% else %}
+                <span class="material-symbols-outlined text-white text-6xl">folder_off</span>
+              {% endif %}
+            </div>
+
+            <h3 class="text-2xl font-black mb-2">
+              Material Actions
+            </h3>
+
+            <p class="text-sm text-slate-500 leading-relaxed mb-6">
+              Use these buttons to open the resource or return to the course page.
+            </p>
+
+            <div class="space-y-3">
+
+              {% if material.content_url %}
+
+                {% if material.content_url.startswith('uploads/') %}
+                <a href="/{{ material.content_url }}"
+                   target="_blank"
+                   class="w-full py-4 rounded-xl bg-indigo-600 text-white font-bold shadow-lg shadow-indigo-600/20 hover:bg-indigo-700 transition flex items-center justify-center gap-2">
+                  <span class="material-symbols-outlined">open_in_new</span>
+                  Open File
+                </a>
+                {% else %}
+                <a href="{{ material.content_url }}"
+                   target="_blank"
+                   class="w-full py-4 rounded-xl bg-indigo-600 text-white font-bold shadow-lg shadow-indigo-600/20 hover:bg-indigo-700 transition flex items-center justify-center gap-2">
+                  <span class="material-symbols-outlined">open_in_new</span>
+                  Open Link
+                </a>
+                {% endif %}
+
+              {% else %}
+
+                <button disabled
+                        class="w-full py-4 rounded-xl bg-slate-300 text-white font-bold cursor-not-allowed">
+                  No File Attached
+                </button>
+
+              {% endif %}
+
+              <a href="/courses/{{ course.course_id }}/details"
+                 class="w-full py-4 rounded-xl bg-slate-100 text-slate-700 font-bold hover:bg-slate-200 transition flex items-center justify-center gap-2">
+                <span class="material-symbols-outlined">arrow_back</span>
+                Back to Course
+              </a>
+
+            </div>
+
+          </div>
+
+          <!-- SMALL INFO CARD -->
+          <div class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6">
+
+            <p class="text-xs font-bold uppercase tracking-widest text-slate-400 mb-4">
+              Study Tip
+            </p>
+
+            <p class="text-sm text-slate-600 leading-relaxed">
+              Open the PDF in a new tab if you want a larger view while keeping this lesson page available.
+            </p>
+
+          </div>
 
         </div>
-
-      </div>
-
-    </div>
-
-    <!-- VIDEO / IMAGE -->
-    <div class="relative mb-16">
-
-      <div class="aspect-video w-full rounded-2xl overflow-hidden shadow-2xl bg-indigo-600 flex items-center justify-center">
-
-        <span class="material-symbols-outlined text-white text-8xl">
-          play_circle
-        </span>
-
-      </div>
+      </aside>
 
     </div>
 
-    <!-- CONTENT -->
-    <article class="max-w-4xl">
-
-      <div class="prose prose-slate prose-lg max-w-none">
-
-        <p class="text-xl leading-relaxed text-slate-700 font-light mb-8">
-
-          {{ material.content_text }}
-
-        </p>
-
-      </div>
-
-      {% if material.content_url %}
-
-      <a href="{{ material.content_url }}"
-         target="_blank"
-         class="inline-flex items-center gap-2 px-6 py-4 mt-8 bg-indigo-600 text-white rounded-xl font-bold hover:bg-indigo-700 transition">
-
-        Open Material
-
-        <span class="material-symbols-outlined">
-          open_in_new
-        </span>
-
-      </a>
-
-      {% endif %}
-
-    </article>
-
-    <!-- BACK BUTTON -->
-    <div class="mt-20">
-
-      <a href="/courses/{{ course.course_id }}/details"
-         class="inline-flex items-center gap-2 text-slate-500 font-bold hover:text-indigo-600 transition-colors">
-
-        <span class="material-symbols-outlined">
-          arrow_back
-        </span>
-
-        Back to Course
-
-      </a>
-
-    </div>
-
-  </div>
+  </section>
 
 </main>
 

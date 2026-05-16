@@ -1,4 +1,6 @@
 from flask import Flask, render_template
+from flask import Flask, render_template, send_from_directory
+import os
 
 # Auth routes
 from app.routes.login import login
@@ -84,6 +86,12 @@ def create_app():
     @app.route("/profile-page")
     def profile_page():
         return render_template("profile.html")
+    
+    @app.route("/uploads/materials/<path:filename>")
+    def uploaded_material(filename):
+     upload_folder = os.path.join(os.getcwd(), "uploads", "materials")
+     return send_from_directory(upload_folder, filename)
+
 
     # AUTH API
     app.add_url_rule("/signup", view_func=signup, methods=["POST"])
