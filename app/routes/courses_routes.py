@@ -2,6 +2,8 @@ from flask import request, jsonify
 import os
 from werkzeug.utils import secure_filename
 
+
+
 from app.utils.jwt_handler import get_user_id_from_token
 from app.models.course import (
     get_user_enrolled_courses,
@@ -23,6 +25,7 @@ def get_my_courses():
         return jsonify({"error": "Invalid or missing token"}), 401
      
     category = request.args.get("category")
+    
 
     courses = get_user_enrolled_courses(user_id,category)
 
@@ -44,6 +47,7 @@ def api_get_all_courses():
         return jsonify({
             "error": str(e)
         }), 500
+
 
 
 
