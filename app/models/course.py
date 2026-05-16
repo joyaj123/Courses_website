@@ -125,6 +125,28 @@ def get_user_enrolled_courses(user_id, category=None):
     conn.close()
 
     return courses
+def get_all_courses_from_db():
+    conn = get_connection()
+    cursor = conn.cursor(dictionary=True)
+
+    cursor.execute("""
+        SELECT 
+            courses.course_id,
+            courses.title,
+            courses.description,
+            categories.name AS category,
+            difficulty.name AS difficulty
+        FROM courses
+        LEFT JOIN categories ON courses.cat_id = categories.cat_id
+        LEFT JOIN difficulty ON courses.diff_id = difficulty.diff_id
+    """)
+
+    courses = cursor.fetchall()
+
+    cursor.close()
+    conn.close()
+
+    return courses
 
 
 def get_categories_with_course_count():

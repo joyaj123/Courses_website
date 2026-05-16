@@ -16,6 +16,7 @@ from app.routes.courses_routes import (
     delete_course
 )
 
+
 # Admin course routes
 from app.routes.admin_course_routes import (
     add_course,
@@ -26,7 +27,7 @@ from app.routes.admin_course_routes import (
 )
 
 # Course details
-from app.routes.course_details import course_details
+from app.routes.course_details import course_details, course_material
 
 #profile route
 from app.routes.profile_routes import get_profile, update_profile
@@ -70,6 +71,7 @@ def create_app():
 
         return render_template("course_catalog.html")
     
+    
     @app.route("/course-materials")
     def course_materials_page():
         return render_template("course_details.html")
@@ -99,6 +101,12 @@ def create_app():
 
     # COURSE DETAILS / LEARNING
     app.add_url_rule("/courses/<int:course_id>/details", view_func=course_details, methods=["GET"])
+    # COURSE MATERIAL PAGE
+    app.add_url_rule(
+       "/course/<int:course_id>/material/<int:material_id>",
+        view_func=course_material,
+        methods=["GET"]
+     ) 
 
     app.add_url_rule(
         "/courses/<int:course_id>/learning/<int:lesson_id>",
