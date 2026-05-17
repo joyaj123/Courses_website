@@ -126,7 +126,7 @@ def get_user_enrolled_courses(user_id, category=None):
 
     return courses
 def get_all_courses_from_db():
-    conn = get_connection()
+    conn = get_db_connection()
     cursor = conn.cursor(dictionary=True)
 
     cursor.execute("""
@@ -404,7 +404,7 @@ def delete_course_by_id(course_id):
         "DELETE FROM Courses WHERE course_id = %s",
         (course_id,)
     )
-
+    conn.commit()
     conn.close()
     cursor.close()
 
